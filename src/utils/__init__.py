@@ -1,0 +1,1 @@
+# ThinkLM General Helper Functions
