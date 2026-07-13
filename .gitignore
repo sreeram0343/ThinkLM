@@ -1,0 +1,104 @@
+# ==========================================
+# ThinkLM BTech Capstone Project - .gitignore
+# ==========================================
+
+# 1. Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+target/
+conda-env/
+*.venv
+*venv
+
+# 2. Pycache, Compiler Artifacts & Build Outputs
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.ipynb_checkpoints
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 3. Model Weights & Cache Directories (HuggingFace, PyTorch, Local Cache)
+# HF/torch default cache dirs (local)
+.cache/
+.cache/huggingface/
+.cache/torch/
+# Custom/standard model weights download formats
+models/
+weights/
+checkpoints/
+checkpoint-*/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.ckpt
+*.pb
+*.h5
+
+# 4. Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+.env.local
+.env.backup
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+
+# 5. OS-Specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 6. Local Scratch, Logs, Testing & IDEs
+.snapshots/
+*.log
+local_scratch/
+scratch/
+test_scratch/
+.pytest_cache/
+.coverage
+htmlcov/
+.nosepyarea/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*~
