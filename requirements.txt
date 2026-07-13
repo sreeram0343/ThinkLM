@@ -1,0 +1,32 @@
+# PyTorch (optimized for CUDA execution where available)
+# Note: For GPU execution, install matching CUDA torch binaries (e.g. pip install torch --index-url https://download.pytorch.org/whl/cu121)
+torch>=2.2.0
+accelerate>=0.28.0
+
+# HuggingFace Ecosystem
+transformers>=4.38.0
+peft>=0.9.0
+trl>=0.8.0
+datasets>=2.18.0
+
+# Vector Search & Sparse Indexes
+rank-bm25>=0.2.2
+faiss-cpu>=1.8.0
+numpy>=1.24.0
+
+# NetworkX (for semantic graph-based memory)
+networkx>=3.2.0
+
+# Local Tooling / API Utilities
+fastapi>=0.110.0
+uvicorn>=0.28.0
+pydantic>=2.6.0
+
+# General Utilities
+python-dotenv>=1.0.1
+requests>=2.31.0
+tqdm>=4.66.0
+matplotlib>=3.8.0
+
+# Testing
+pytest>=8.0.0
