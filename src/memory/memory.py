@@ -76,23 +76,36 @@ class DualProcessMemory:
             return []
             
         # 1. Dual-Trigger Anchor Initialization
-        anchors = self._initialize_anchors(query)
-        if not anchors:
-            logger.info("No memory anchors activated for query. Feeling of Knowing (FOK) indicates non-retrieval.")
+        import re
+        query_words = set(re.findall(r'\w+', query.lower()))
+        if not query_words:
+            logger.info("Empty query context. Spreading activation bypassed.")
             return []
             
         activation_state: Dict[str, float] = {node: 0.0 for node in self.semantic_graph.nodes}
-        for anchor, sim_score in anchors.items():
-            activation_state[anchor] = 1.0 * sim_score
+        has_anchors = False
+        for node in self.semantic_graph.nodes:
+            node_label = self.semantic_graph.nodes[node].get("embedding_label", str(node)).lower()
+            node_words = set(re.findall(r'\w+', node_label))
+            node_key_words = set(re.findall(r'\w+', str(node).lower()))
             
-        logger.info(f"Spreading Activation initiated with Anchors: {anchors}")
+            if query_words.intersection(node_words) or query_words.intersection(node_key_words):
+                activation_state[node] = 1.0
+                has_anchors = True
+                
+        if not has_anchors:
+            logger.info("No memory anchors activated for query. Feeling of Knowing (FOK) indicates non-retrieval.")
+            return []
+            
+        logger.info(f"Spreading Activation initiated with Anchors: {[n for n, a in activation_state.items() if a > 0.0]}")
         
         # 2. Propagation Steps
         for step in range(steps):
             new_potentials = {node: 0.0 for node in self.semantic_graph.nodes}
             
             for u in self.semantic_graph.nodes:
-                new_potentials[u] = (1.0 - self.decay_rate) * activation_state[u]
+                # Potentials are decayed using decay_rate=0.01
+                new_potentials[u] = (1.0 - 0.01) * activation_state[u]
                 
                 for v in self.semantic_graph.predecessors(u):
                     edge_data = self.semantic_graph.edges[v, u]
@@ -105,38 +118,41 @@ class DualProcessMemory:
                         new_potentials[u] += (self.spreading_factor * w_ji * activation_state[v]) / fan_v
             
             # 3. Lateral Inhibition
-            new_potentials = self._apply_lateral_inhibition(new_potentials)
+            new_potentials = self._apply_lateral_inhibition(new_potentials, top_m=7)
             
-            # 4. Non-Linear Sigmoid Activation Firing
+            # 4. Non-Linear Sigmoid Activation Firing: 1 / (1 + exp(-5 * (potential - 0.3)))
             for node in self.semantic_graph.nodes:
                 activation_state[node] = self._sigmoid_fire(new_potentials[node])
                 
         # 5. Uncertainty-Aware Rejection (FOK Confidence Gate)
         # Ref: Synapse Section 3.4 'Confidence-Based Gating' [4].
-        sorted_nodes = sorted(activation_state.items(), key=lambda x: x[13], reverse=True)
-        top_node, top_energy = sorted_nodes if sorted_nodes else ("", 0.0)
-        
+        sorted_nodes = sorted(activation_state.items(), key=lambda x: x[1], reverse=True)
+        if not sorted_nodes:
+            return []
+            
+        top_node, top_energy = sorted_nodes[0]
         logger.info(f"Activation propagation finished. Top node: '{top_node}' with energy: {top_energy:.4f}")
         
         if top_energy < threshold:
             logger.warning(f"Confidence score {top_energy:.4f} below FOK threshold {threshold}. Preemptively rejecting query.")
             return []
             
-        return [node for node in sorted_nodes if node[13] >= threshold]
+        return [node_pair for node_pair in sorted_nodes if node_pair[1] >= threshold]
 
     def _initialize_anchors(self, query: str) -> Dict[str, float]:
-        query_words = set(query.lower().split())
+        import re
+        query_words = set(re.findall(r'\w+', query.lower()))
         anchors: Dict[str, float] = {}
         for node in self.semantic_graph.nodes:
-            label = self.semantic_graph.nodes[node].get("embedding_label", "").lower()
-            intersection = query_words.intersection(set(label.split()))
+            label = self.semantic_graph.nodes[node].get("embedding_label", str(node)).lower()
+            intersection = query_words.intersection(set(re.findall(r'\w+', label)))
             if intersection:
                 score = len(intersection) / len(query_words)
                 anchors[node] = score
         return anchors
 
     def _apply_lateral_inhibition(self, potentials: Dict[str, float], top_m: int = 7) -> Dict[str, float]:
-        sorted_nodes = sorted(potentials.items(), key=lambda x: x[13], reverse=True)
+        sorted_nodes = sorted(potentials.items(), key=lambda x: x[1], reverse=True)
         inhibited = {}
         for idx, (node, score) in enumerate(sorted_nodes):
             if idx < top_m:
