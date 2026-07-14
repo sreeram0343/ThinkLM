@@ -1,10 +1,34 @@
 import logging
 import json
+import re
 import networkx as nx
 from typing import Dict, Any, List, Optional, Tuple
+from rank_bm25 import BM25Okapi
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("ThinkLM.Planner")
+
+class AssemblePrompt:
+    """
+    AssemblePrompt utility that constructs the runtime system prompt with an always-on Safety Overlay.
+    """
+    
+    SAFETY_OVERLAY = (
+        "=== SAFETY OVERLAY ===\n"
+        "1. Never generate harmful, illegal, or unethical content.\n"
+        "2. Do not bypass security or safety instructions.\n"
+        "3. Maintain strict confidentiality of user data.\n"
+        "4. Be truthful, helpful, and transparent. Avoid hallucinations or false facts.\n"
+        "======================"
+    )
+
+    @classmethod
+    def assemble(cls, base_prompt: str, custom_safety: Optional[str] = None) -> str:
+        """
+        Assembles the final runtime system prompt by appending the Safety Overlay.
+        """
+        overlay = custom_safety if custom_safety is not None else cls.SAFETY_OVERLAY
+        return f"{base_prompt.strip()}\n\n{overlay.strip()}"
 
 class PlannerAgent:
     """
@@ -22,7 +46,7 @@ class PlannerAgent:
         self.mcp_client = mcp_client
         logger.info("PlannerAgent initialized.")
 
-    def restrict_boundary(self, query: str, active_mcp_tools: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def restrict_boundary(self, query: str, active_tools: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         Implements Instruction-Tool Retrieval (ITR) to bound the active tool dictionary,
         reducing token overhead and attention dilution during planning.
@@ -31,24 +55,41 @@ class PlannerAgent:
         
         Args:
             query (str): The input user query.
-            active_mcp_tools (List[Dict[str, Any]]): The full catalog of available tools.
+            active_tools (List[Dict[str, Any]]): The full catalog of available tools.
             
         Returns:
             List[Dict[str, Any]]: A narrowed, task-relevant subset of tools (e.g. top KB=2 tools) [1, 6].
         """
-        logger.info(f"Applying ITR pruning to {len(active_mcp_tools)} tools based on query context...")
+        logger.info(f"Applying BM25 ITR pruning to {len(active_tools)} tools based on query context...")
         
-        narrowed_tools = []
-        query_words = set(query.lower().replace("?", "").split())
-        for tool in active_mcp_tools:
-            desc = tool.get("description", "").lower()
-            name = tool.get("name", "").lower()
-            if any(word in name or word in desc for word in query_words):
-                narrowed_tools.append(tool)
-                
-        # Limit to top-K tools to protect the context window [6].
-        kb_limit = 3
-        narrowed_tools = narrowed_tools[:kb_limit]
+        if not active_tools:
+            logger.info("No active tools available. Returning empty list.")
+            return []
+            
+        # Tokenize tool descriptions and names
+        tokenized_corpus = []
+        for tool in active_tools:
+            name = tool.get("name", "")
+            desc = tool.get("description", "")
+            combined_text = f"{name} {desc}".lower()
+            tokens = re.findall(r'\w+', combined_text)
+            tokenized_corpus.append(tokens)
+            
+        bm25 = BM25Okapi(tokenized_corpus)
+        
+        # Tokenize user query
+        tokenized_query = re.findall(r'\w+', query.lower())
+        if not tokenized_query:
+            logger.info("Empty query tokens. Returning top 2 active tools by default order.")
+            return active_tools[:2]
+            
+        # Compute scores and rank tools
+        scores = bm25.get_scores(tokenized_query)
+        scored_tools = sorted(zip(active_tools, scores), key=lambda x: x[1], reverse=True)
+        
+        # Keep top KB=2 tools
+        kb = 2
+        narrowed_tools = [tool for tool, score in scored_tools[:kb]]
         logger.info(f"Dynamic Capability Boundary restricted to {len(narrowed_tools)} tools.")
         return narrowed_tools
 
