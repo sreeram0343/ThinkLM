@@ -1,3 +1,5 @@
+<img width="870" height="653" alt="image" src="https://github.com/user-attachments/assets/105a6dc7-fb43-4163-8409-a023855f6b5c" />
+
 # ThinkLM: Self-Evolving Language Model
 
 ThinkLM is a capstone project focused on building a cognitively inspired multi-agent reasoning system for complex task execution. The project combines language-driven planning, tool-awareness, graph-based memory, and iterative self-improvement to create an AI system that reasons, plans, and evolves. 
