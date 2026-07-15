@@ -1,0 +1,1002 @@
+[
+    {
+        "id": "56be4db0acb8001400a502ec",
+        "question": "Which NFL team represented the AFC at Super Bowl 50?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Denver Broncos",
+            "Denver Broncos",
+            "Denver Broncos"
+        ]
+    },
+    {
+        "id": "56be4db0acb8001400a502ed",
+        "question": "Which NFL team represented the NFC at Super Bowl 50?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Carolina Panthers",
+            "Carolina Panthers",
+            "Carolina Panthers"
+        ]
+    },
+    {
+        "id": "56be4db0acb8001400a502ee",
+        "question": "Where did Super Bowl 50 take place?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Santa Clara, California",
+            "Levi's Stadium",
+            "Levi's Stadium in the San Francisco Bay Area at Santa Clara, California."
+        ]
+    },
+    {
+        "id": "56be4db0acb8001400a502ef",
+        "question": "Which NFL team won Super Bowl 50?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Denver Broncos",
+            "Denver Broncos",
+            "Denver Broncos"
+        ]
+    },
+    {
+        "id": "56be4db0acb8001400a502f0",
+        "question": "What color was used to emphasize the 50th anniversary of the Super Bowl?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "gold",
+            "gold",
+            "gold"
+        ]
+    },
+    {
+        "id": "56be8e613aeaaa14008c90d1",
+        "question": "What was the theme of Super Bowl 50?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "\"golden anniversary\"",
+            "gold-themed",
+            "\"golden anniversary"
+        ]
+    },
+    {
+        "id": "56be8e613aeaaa14008c90d2",
+        "question": "What day was the game played on?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "February 7, 2016",
+            "February 7",
+            "February 7, 2016"
+        ]
+    },
+    {
+        "id": "56be8e613aeaaa14008c90d3",
+        "question": "What is the AFC short for?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "American Football Conference",
+            "American Football Conference",
+            "American Football Conference"
+        ]
+    },
+    {
+        "id": "56bea9923aeaaa14008c91b9",
+        "question": "What was the theme of Super Bowl 50?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "\"golden anniversary\"",
+            "gold-themed",
+            "gold"
+        ]
+    },
+    {
+        "id": "56bea9923aeaaa14008c91ba",
+        "question": "What does AFC stand for?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "American Football Conference",
+            "American Football Conference",
+            "American Football Conference"
+        ]
+    },
+    {
+        "id": "56bea9923aeaaa14008c91bb",
+        "question": "What day was the Super Bowl played on?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "February 7, 2016",
+            "February 7",
+            "February 7, 2016"
+        ]
+    },
+    {
+        "id": "56beace93aeaaa14008c91df",
+        "question": "Who won Super Bowl 50?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Denver Broncos",
+            "Denver Broncos",
+            "Denver Broncos"
+        ]
+    },
+    {
+        "id": "56beace93aeaaa14008c91e0",
+        "question": "What venue did Super Bowl 50 take place in?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Levi's Stadium",
+            "Levi's Stadium",
+            "Levi's Stadium in the San Francisco Bay Area at Santa Clara"
+        ]
+    },
+    {
+        "id": "56beace93aeaaa14008c91e1",
+        "question": "What city did Super Bowl 50 take place in?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Santa Clara",
+            "Santa Clara",
+            "Santa Clara"
+        ]
+    },
+    {
+        "id": "56beace93aeaaa14008c91e2",
+        "question": "If Roman numerals were used, what would Super Bowl 50 have been called?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Super Bowl L",
+            "L",
+            "Super Bowl L"
+        ]
+    },
+    {
+        "id": "56beace93aeaaa14008c91e3",
+        "question": "Super Bowl 50 decided the NFL champion for what season?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "2015",
+            "the 2015 season",
+            "2015"
+        ]
+    },
+    {
+        "id": "56bf10f43aeaaa14008c94fd",
+        "question": "What year did the Denver Broncos secure a Super Bowl title for the third time?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "2015",
+            "2016",
+            "2015"
+        ]
+    },
+    {
+        "id": "56bf10f43aeaaa14008c94fe",
+        "question": "What city did Super Bowl 50 take place in?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Santa Clara",
+            "Santa Clara",
+            "Santa Clara"
+        ]
+    },
+    {
+        "id": "56bf10f43aeaaa14008c94ff",
+        "question": "What stadium did Super Bowl 50 take place in?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Levi's Stadium",
+            "Levi's Stadium",
+            "Levi's Stadium"
+        ]
+    },
+    {
+        "id": "56bf10f43aeaaa14008c9500",
+        "question": "What was the final score of Super Bowl 50? ",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "24\u201310",
+            "24\u201310",
+            "24\u201310"
+        ]
+    },
+    {
+        "id": "56bf10f43aeaaa14008c9501",
+        "question": "What month, day and year did Super Bowl 50 take place? ",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "February 7, 2016",
+            "February 7, 2016",
+            "February 7, 2016"
+        ]
+    },
+    {
+        "id": "56d20362e7d4791d009025e8",
+        "question": "What year was Super Bowl 50?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "2015",
+            "2016",
+            "2016"
+        ]
+    },
+    {
+        "id": "56d20362e7d4791d009025e9",
+        "question": "What team was the AFC champion?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Denver Broncos",
+            "Denver Broncos",
+            "Denver Broncos"
+        ]
+    },
+    {
+        "id": "56d20362e7d4791d009025ea",
+        "question": "What team was the NFC champion?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Carolina Panthers",
+            "Carolina Panthers",
+            "Carolina Panthers"
+        ]
+    },
+    {
+        "id": "56d20362e7d4791d009025eb",
+        "question": "Who won Super Bowl 50?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Denver Broncos",
+            "Denver Broncos",
+            "Denver Broncos"
+        ]
+    },
+    {
+        "id": "56d600e31c85041400946eae",
+        "question": "Super Bowl 50 determined the NFL champion for what season?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "2015",
+            "the 2015 season",
+            "2015"
+        ]
+    },
+    {
+        "id": "56d600e31c85041400946eb0",
+        "question": "Which team won Super Bowl 50.",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Denver Broncos",
+            "Denver Broncos",
+            "Denver Broncos"
+        ]
+    },
+    {
+        "id": "56d600e31c85041400946eb1",
+        "question": "Where was Super Bowl 50 held?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Santa Clara, California.",
+            "Levi's Stadium",
+            "Levi's Stadium"
+        ]
+    },
+    {
+        "id": "56d9895ddc89441400fdb50e",
+        "question": "The name of the NFL championship game is?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Super Bowl",
+            "Super Bowl",
+            "Super Bowl"
+        ]
+    },
+    {
+        "id": "56d9895ddc89441400fdb510",
+        "question": "What 2015 NFL team one the AFC playoff?",
+        "context": "Super Bowl 50 was an American football game to determine the champion of the National Football League (NFL) for the 2015 season. The American Football Conference (AFC) champion Denver Broncos defeated the National Football Conference (NFC) champion Carolina Panthers 24\u201310 to earn their third Super Bowl title. The game was played on February 7, 2016, at Levi's Stadium in the San Francisco Bay Area at Santa Clara, California. As this was the 50th Super Bowl, the league emphasized the \"golden anniversary\" with various gold-themed initiatives, as well as temporarily suspending the tradition of naming each Super Bowl game with Roman numerals (under which the game would have been known as \"Super Bowl L\"), so that the logo could prominently feature the Arabic numerals 50.",
+        "answers": [
+            "Denver Broncos",
+            "Denver Broncos",
+            "Denver Broncos"
+        ]
+    },
+    {
+        "id": "56be4e1facb8001400a502f6",
+        "question": "Which Carolina Panthers player was named Most Valuable Player?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Cam Newton",
+            "Cam Newton",
+            "Cam Newton"
+        ]
+    },
+    {
+        "id": "56be4e1facb8001400a502f9",
+        "question": "How many appearances have the Denver Broncos made in the Super Bowl?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "8",
+            "eight",
+            "eight"
+        ]
+    },
+    {
+        "id": "56be4e1facb8001400a502fa",
+        "question": "What year was the Carolina Panthers franchise founded?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "1995",
+            "1995",
+            "1995"
+        ]
+    },
+    {
+        "id": "56beaa4a3aeaaa14008c91c2",
+        "question": "What team did the Panthers defeat?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Arizona Cardinals",
+            "the Arizona Cardinals",
+            "Arizona Cardinals"
+        ]
+    },
+    {
+        "id": "56beaa4a3aeaaa14008c91c3",
+        "question": "Who did the Broncos prevent from going to the Super Bowl?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "New England Patriots",
+            "the New England Patriots",
+            "New England Patriots"
+        ]
+    },
+    {
+        "id": "56bead5a3aeaaa14008c91e9",
+        "question": "Who did the Panthers beat in the NFC Championship Game?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Arizona Cardinals",
+            "the Arizona Cardinals",
+            "Arizona Cardinals"
+        ]
+    },
+    {
+        "id": "56bead5a3aeaaa14008c91ea",
+        "question": "Who lost to the Broncos in the AFC Championship?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "New England Patriots",
+            "the New England Patriots",
+            "New England Patriots"
+        ]
+    },
+    {
+        "id": "56bead5a3aeaaa14008c91eb",
+        "question": "Who were the defending Super Bowl champions?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "New England Patriots",
+            "the New England Patriots",
+            "New England Patriots"
+        ]
+    },
+    {
+        "id": "56bead5a3aeaaa14008c91ec",
+        "question": "How many teams have been in the Super Bowl eight times?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "four",
+            "four",
+            "four"
+        ]
+    },
+    {
+        "id": "56bead5a3aeaaa14008c91ed",
+        "question": "Who was this season's NFL MVP?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Cam Newton",
+            "Cam Newton",
+            "Cam Newton"
+        ]
+    },
+    {
+        "id": "56bf159b3aeaaa14008c9507",
+        "question": "What was the win/loss ratio in 2015 for the Carolina Panthers during their regular season?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "15\u20131",
+            "15\u20131",
+            "15\u20131"
+        ]
+    },
+    {
+        "id": "56bf159b3aeaaa14008c9508",
+        "question": "Which Carolina Panthers team member was picked as the team's MVP in 2015? ",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Cam Newton",
+            "Cam Newton",
+            "Cam Newton"
+        ]
+    },
+    {
+        "id": "56bf159b3aeaaa14008c9509",
+        "question": "What were the win/loss game stats for the Denver Bronco's regular season in 2015?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "12\u20134",
+            "12\u20134",
+            "12\u20134"
+        ]
+    },
+    {
+        "id": "56bf159b3aeaaa14008c950a",
+        "question": "How many teams have played in the Super Bowl eight times?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "4",
+            "four",
+            "four"
+        ]
+    },
+    {
+        "id": "56bf159b3aeaaa14008c950b",
+        "question": "Which team did not get a chance to defend their Super Bowl XLIX win in Super Bowl 50?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "New England Patriots",
+            "the New England Patriots",
+            "New England Patriots"
+        ]
+    },
+    {
+        "id": "56d2045de7d4791d009025f3",
+        "question": "Who is the quarterback for the Panthers?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Cam Newton",
+            "Cam Newton",
+            "Cam Newton"
+        ]
+    },
+    {
+        "id": "56d2045de7d4791d009025f4",
+        "question": "Who did Carolina beat in the NFC championship game?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Arizona Cardinals",
+            "the Arizona Cardinals",
+            "Arizona Cardinals"
+        ]
+    },
+    {
+        "id": "56d2045de7d4791d009025f5",
+        "question": "How many times have the Panthers been in the Super Bowl?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "2",
+            "second",
+            "second"
+        ]
+    },
+    {
+        "id": "56d2045de7d4791d009025f6",
+        "question": "Who did Denver beat in the AFC championship?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "New England Patriots",
+            "the New England Patriots",
+            "New England Patriots"
+        ]
+    },
+    {
+        "id": "56d6017d1c85041400946ebe",
+        "question": "Who was the Most Valuable Player for the 2015 NFL season?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Cam Newton",
+            "Cam Newton",
+            "Cam Newton"
+        ]
+    },
+    {
+        "id": "56d6017d1c85041400946ec1",
+        "question": "Who did Denver beat in the 2015 AFC Championship game?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "New England Patriots",
+            "the New England Patriots",
+            "New England Patriots"
+        ]
+    },
+    {
+        "id": "56d6017d1c85041400946ec2",
+        "question": "Who did the Carolina Panthers beat in the 2015 NFC Championship game?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Arizona Cardinals",
+            "the Arizona Cardinals",
+            "Arizona Cardinals"
+        ]
+    },
+    {
+        "id": "56d98a59dc89441400fdb52a",
+        "question": "Who was the 2015 NFL MVP?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Cam Newton",
+            "Cam Newton",
+            "Cam Newton"
+        ]
+    },
+    {
+        "id": "56d98a59dc89441400fdb52b",
+        "question": "Who did the Panthers beat to become the NFC champs?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "Arizona Cardinals",
+            "the Arizona Cardinals",
+            "Arizona Cardinals"
+        ]
+    },
+    {
+        "id": "56d98a59dc89441400fdb52e",
+        "question": "What year did the Carolina Panthers form?",
+        "context": "The Panthers finished the regular season with a 15\u20131 record, and quarterback Cam Newton was named the NFL Most Valuable Player (MVP). They defeated the Arizona Cardinals 49\u201315 in the NFC Championship Game and advanced to their second Super Bowl appearance since the franchise was founded in 1995. The Broncos finished the regular season with a 12\u20134 record, and denied the New England Patriots a chance to defend their title from Super Bowl XLIX by defeating them 20\u201318 in the AFC Championship Game. They joined the Patriots, Dallas Cowboys, and Pittsburgh Steelers as one of four teams that have made eight appearances in the Super Bowl.",
+        "answers": [
+            "1995.",
+            "1995",
+            "1995"
+        ]
+    },
+    {
+        "id": "56be4eafacb8001400a50302",
+        "question": "Who was the Super Bowl 50 MVP?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "Von Miller",
+            "Von Miller",
+            "Miller"
+        ]
+    },
+    {
+        "id": "56be4eafacb8001400a50303",
+        "question": "How many fumbles did Von Miller force in Super Bowl 50?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "2",
+            "two",
+            "two"
+        ]
+    },
+    {
+        "id": "56be4eafacb8001400a50304",
+        "question": "Which team held the scoring lead throughout the entire game?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "Broncos",
+            "The Broncos",
+            "Broncos"
+        ]
+    },
+    {
+        "id": "56beab833aeaaa14008c91d2",
+        "question": "Which Denver linebacker was named Super Bowl MVP?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "linebacker Von Miller",
+            "Von Miller",
+            "Miller"
+        ]
+    },
+    {
+        "id": "56beab833aeaaa14008c91d3",
+        "question": "How many solo tackles did Von Miller make at Super Bowl 50?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "five solo tackles",
+            "five",
+            "five"
+        ]
+    },
+    {
+        "id": "56beab833aeaaa14008c91d4",
+        "question": "Who was limited by Denver's defense?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "Newton was limited by Denver's defense",
+            "Newton",
+            "Newton"
+        ]
+    },
+    {
+        "id": "56beae423aeaaa14008c91f4",
+        "question": "How many times was Cam Newton sacked?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "seven",
+            "seven",
+            "seven"
+        ]
+    },
+    {
+        "id": "56beae423aeaaa14008c91f5",
+        "question": "Who won the Super Bowl MVP?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "Von Miller",
+            "The Broncos",
+            "Miller"
+        ]
+    },
+    {
+        "id": "56beae423aeaaa14008c91f6",
+        "question": "How many turnovers did Cam Newton have?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "three",
+            "three",
+            "three"
+        ]
+    },
+    {
+        "id": "56beae423aeaaa14008c91f7",
+        "question": "How many fumbles did Von Miller force?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "two",
+            "two",
+            "two"
+        ]
+    },
+    {
+        "id": "56bf17653aeaaa14008c9511",
+        "question": "Who was given the esteemed status of MVP for Super Bowl 50?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "Von Miller",
+            "Von Miller",
+            "Miller"
+        ]
+    },
+    {
+        "id": "56bf17653aeaaa14008c9513",
+        "question": "What position does Von Miller play for the Denver Broncos?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "linebacker",
+            "linebacker",
+            "linebacker"
+        ]
+    },
+    {
+        "id": "56bf17653aeaaa14008c9514",
+        "question": "What was the number of solo tackles that Von Miller had in Super Bowl 50?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "5",
+            "five",
+            "five"
+        ]
+    },
+    {
+        "id": "56bf17653aeaaa14008c9515",
+        "question": "How many forced fumbles did Von Miller have during the Super Bowl 50 game?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "2",
+            "two",
+            "two"
+        ]
+    },
+    {
+        "id": "56d204ade7d4791d00902603",
+        "question": "Who won the MVP for the Super Bowl?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "Von Miller",
+            "Von Miller",
+            "Von Miller"
+        ]
+    },
+    {
+        "id": "56d204ade7d4791d00902604",
+        "question": "How many tackles did Von Miller get during the game?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "5",
+            "five",
+            "five"
+        ]
+    },
+    {
+        "id": "56d601e41c85041400946ece",
+        "question": "How many times was Cam Newton sacked in Super Bowl 50?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "seven",
+            "seven",
+            "seven"
+        ]
+    },
+    {
+        "id": "56d601e41c85041400946ecf",
+        "question": "How many times did the Denver defense force Newton into turnovers?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "three",
+            "three",
+            "three"
+        ]
+    },
+    {
+        "id": "56d601e41c85041400946ed0",
+        "question": "Which Newton turnover resulted in seven points for Denver?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "a fumble",
+            "a fumble",
+            "fumble"
+        ]
+    },
+    {
+        "id": "56d601e41c85041400946ed1",
+        "question": "Who was the Most Valuable Player of Super Bowl 50?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "Von Miller",
+            "Von Miller",
+            "Von Miller"
+        ]
+    },
+    {
+        "id": "56d601e41c85041400946ed2",
+        "question": "What position does Von Miller play?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "linebacker",
+            "linebacker",
+            "linebacker"
+        ]
+    },
+    {
+        "id": "56d98b33dc89441400fdb53b",
+        "question": "How many times was the Panthers' quarterback sacked?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "seven",
+            "seven",
+            "seven"
+        ]
+    },
+    {
+        "id": "56d98b33dc89441400fdb53c",
+        "question": "How many times did the Broncos cause turnovers in the game?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "three",
+            "three",
+            "three"
+        ]
+    },
+    {
+        "id": "56d98b33dc89441400fdb53d",
+        "question": "What Denver player caused two fumbles for the Panthers?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "Von Miller",
+            "Von Miller",
+            "Von Miller"
+        ]
+    },
+    {
+        "id": "56d98b33dc89441400fdb53e",
+        "question": "How many tackles did Von Miller accomlish by himself in the game?",
+        "context": "The Broncos took an early lead in Super Bowl 50 and never trailed. Newton was limited by Denver's defense, which sacked him seven times and forced him into three turnovers, including a fumble which they recovered for a touchdown. Denver linebacker Von Miller was named Super Bowl MVP, recording five solo tackles, 2\u00bd sacks, and two forced fumbles.",
+        "answers": [
+            "five",
+            "five",
+            "five"
+        ]
+    },
+    {
+        "id": "56be5333acb8001400a5030a",
+        "question": "Which network broadcasted Super Bowl 50 in the U.S.?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "CBS",
+            "CBS",
+            "CBS"
+        ]
+    },
+    {
+        "id": "56be5333acb8001400a5030b",
+        "question": "What was the average cost for a 30 second commercial during Super Bowl 50?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "$5 million",
+            "$5 million",
+            "$5 million"
+        ]
+    },
+    {
+        "id": "56be5333acb8001400a5030c",
+        "question": "Which group headlined the Super Bowl 50 halftime show?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Coldplay",
+            "Coldplay",
+            "Coldplay"
+        ]
+    },
+    {
+        "id": "56be5333acb8001400a5030d",
+        "question": "Which performers joined the headliner during the Super Bowl 50 halftime show?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Beyonc\u00e9 and Bruno Mars",
+            "Beyonc\u00e9 and Bruno Mars",
+            "Beyonc\u00e9 and Bruno Mars"
+        ]
+    },
+    {
+        "id": "56be5333acb8001400a5030e",
+        "question": "At which Super Bowl did Beyonce headline the halftime show?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Super Bowl XLVII",
+            "Super Bowl XLVII",
+            "XLVII"
+        ]
+    },
+    {
+        "id": "56beaf5e3aeaaa14008c91fd",
+        "question": "Who was the broadcaster for Super Bowl 50 in the United States?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "CBS",
+            "CBS",
+            "CBS"
+        ]
+    },
+    {
+        "id": "56beaf5e3aeaaa14008c91fe",
+        "question": "What was the average cost of a 30-second commercial?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "$5 million",
+            "$5 million",
+            "$5 million"
+        ]
+    },
+    {
+        "id": "56beaf5e3aeaaa14008c91ff",
+        "question": "What halftime performer previously headlined Super Bowl XLVII?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Beyonc\u00e9",
+            "Beyonc\u00e9",
+            "Beyonc\u00e9"
+        ]
+    },
+    {
+        "id": "56beaf5e3aeaaa14008c9200",
+        "question": "What halftime performer previously headlined Super Bowl XLVIII?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Bruno Mars",
+            "Bruno Mars",
+            "Mars"
+        ]
+    },
+    {
+        "id": "56beaf5e3aeaaa14008c9201",
+        "question": "Who was the main performer at this year's halftime show?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Coldplay",
+            "Coldplay",
+            "Coldplay"
+        ]
+    },
+    {
+        "id": "56bf1ae93aeaaa14008c951b",
+        "question": "Which network broadcasted the 50th Super Bowl game? ",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "CBS",
+            "CBS",
+            "CBS"
+        ]
+    },
+    {
+        "id": "56bf1ae93aeaaa14008c951c",
+        "question": "What was the average cost for a TV ad lasting 30 seconds during Super Bowl 50?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "$5 million",
+            "$5 million",
+            "$5 million"
+        ]
+    },
+    {
+        "id": "56bf1ae93aeaaa14008c951e",
+        "question": "Who was the male singer who performed as a special guest during Super Bowl 50?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Bruno Mars",
+            "Bruno Mars",
+            "Bruno Mars,"
+        ]
+    },
+    {
+        "id": "56bf1ae93aeaaa14008c951f",
+        "question": "What ranking does the Super Bowl 50 halftime show have on the list of most watched TV broadcasts?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "third",
+            "third",
+            "third"
+        ]
+    },
+    {
+        "id": "56d2051ce7d4791d00902608",
+        "question": "What station aired the Super Bowl?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "CBS",
+            "CBS",
+            "CBS"
+        ]
+    },
+    {
+        "id": "56d2051ce7d4791d00902609",
+        "question": "How much money did a 1/2 minute commercial cost?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "$5 million",
+            "$5 million",
+            "$5 million"
+        ]
+    },
+    {
+        "id": "56d2051ce7d4791d0090260a",
+        "question": "What band headlined half-time during Super Bowl 50?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Coldplay",
+            "Coldplay",
+            "Coldplay"
+        ]
+    },
+    {
+        "id": "56d2051ce7d4791d0090260b",
+        "question": "What two artists came out with Coldplay during the half-time show?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Beyonc\u00e9 and Bruno Mars",
+            "Beyonc\u00e9 and Bruno Mars",
+            "Beyonc\u00e9 and Bruno Mars"
+        ]
+    },
+    {
+        "id": "56d602631c85041400946ed8",
+        "question": "Who broadcast the Super Bowl on TV?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "CBS",
+            "CBS",
+            "CBS"
+        ]
+    },
+    {
+        "id": "56d602631c85041400946eda",
+        "question": "Who headlined the halftime show for Super Bowl 50?",
+        "context": "CBS broadcast Super Bowl 50 in the U.S., and charged an average of $5 million for a 30-second commercial during the game. The Super Bowl 50 halftime show was headlined by the British rock group Coldplay with special guest performers Beyonc\u00e9 and Bruno Mars, who headlined the Super Bowl XLVII and Super Bowl XLVIII halftime shows, respectively. It was the third-most watched U.S. broadcast ever.",
+        "answers": [
+            "Coldplay",
+            "Coldplay",
+            "Coldplay"
+        ]
+    }
+]
