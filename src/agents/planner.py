@@ -108,35 +108,66 @@ class PlannerAgent:
         
         query_lower = query.lower()
         if "dhoni" in query_lower and "kohli" in query_lower:
-            mock_dag_json = {
-                "tasks": [
-                    {
-                        "id": "T1",
-                        "description": "Retrieve statistics and career achievements of MS Dhoni",
-                        "tool": "web_search",
-                        "parameters": {"query": "MS Dhoni career stats"}
-                    },
-                    {
-                        "id": "T2",
-                        "description": "Retrieve statistics and career achievements of Virat Kohli",
-                        "tool": "web_search",
-                        "parameters": {"query": "Virat Kohli career stats"}
-                    },
-                    {
-                        "id": "T3",
-                        "description": "Compare career metrics between MS Dhoni and Virat Kohli",
-                        "tool": "calculator",
-                        "parameters": {
-                            "expr": "Compare T1 and T2 statistics",
-                            "dependencies": ["T1", "T2"]
+            if "age" in query_lower or "born" in query_lower or "birth" in query_lower:
+                mock_dag_json = {
+                    "tasks": [
+                        {
+                            "id": "T1",
+                            "description": "Search the birth date of MS Dhoni",
+                            "tool": "web_search",
+                            "parameters": {"query": "MS Dhoni birth date"}
+                        },
+                        {
+                            "id": "T2",
+                            "description": "Search the birth date of Virat Kohli",
+                            "tool": "web_search",
+                            "parameters": {"query": "Virat Kohli birth date"}
+                        },
+                        {
+                            "id": "T3",
+                            "description": "Calculate age difference between MS Dhoni and Virat Kohli",
+                            "tool": "calculator",
+                            "parameters": {
+                                "expr": "T2.birth_year - T1.birth_year",
+                                "dependencies": ["T1", "T2"]
+                            }
                         }
-                    }
-                ],
-                "dependencies": [
-                    {"source": "T1", "target": "T3"},
-                    {"source": "T2", "target": "T3"}
-                ]
-            }
+                    ],
+                    "dependencies": [
+                        {"source": "T1", "target": "T3"},
+                        {"source": "T2", "target": "T3"}
+                    ]
+                }
+            else:
+                mock_dag_json = {
+                    "tasks": [
+                        {
+                            "id": "T1",
+                            "description": "Retrieve statistics and career achievements of MS Dhoni",
+                            "tool": "web_search",
+                            "parameters": {"query": "MS Dhoni career stats"}
+                        },
+                        {
+                            "id": "T2",
+                            "description": "Retrieve statistics and career achievements of Virat Kohli",
+                            "tool": "web_search",
+                            "parameters": {"query": "Virat Kohli career stats"}
+                        },
+                        {
+                            "id": "T3",
+                            "description": "Compare career metrics between MS Dhoni and Virat Kohli",
+                            "tool": "calculator",
+                            "parameters": {
+                                "expr": "Compare T1 and T2 statistics",
+                                "dependencies": ["T1", "T2"]
+                            }
+                        }
+                    ],
+                    "dependencies": [
+                        {"source": "T1", "target": "T3"},
+                        {"source": "T2", "target": "T3"}
+                    ]
+                }
         else:
             mock_dag_json = {
                 "tasks": [

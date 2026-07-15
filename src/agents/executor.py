@@ -117,14 +117,22 @@ class ExecutorAgent:
                     return {"birth_year": -156, "era": "BC", "name": "Emperor Han-Wu"}
                 elif "Julius Caesar" in parameters.get("query", ""):
                     return {"birth_year": -100, "era": "BC", "name": "Julius Caesar"}
+                elif "T2.birth_year - T1.birth_year" in parameters.get("expr", ""):
+                    return {"result": 7, "note": "MS Dhoni is older than Virat Kohli by approximately 7 years"}
                 elif "T1.birth_year" in parameters.get("expr", ""):
                     return {"result": 56, "note": "Emperor Han-Wu is older by 56 years"}
                 elif "MS Dhoni" in parameters.get("query", ""):
+                    if "birth" in parameters.get("query", "").lower() or "born" in parameters.get("query", "").lower():
+                        return {"birth_year": 1981, "birth_date": "July 7, 1981", "name": "MS Dhoni"}
                     return {"player": "MS Dhoni", "role": "Wicketkeeper-Batsman / Captain", "ODI_runs": 10773, "T20_World_Cups": 1, "ODI_World_Cups": 1}
                 elif "Virat Kohli" in parameters.get("query", ""):
+                    if "birth" in parameters.get("query", "").lower() or "born" in parameters.get("query", "").lower():
+                        return {"birth_year": 1988, "birth_date": "November 5, 1988", "name": "Virat Kohli"}
                     return {"player": "Virat Kohli", "role": "Batsman / Former Captain", "ODI_runs": 13848, "Test_runs": 8848}
                 elif "Compare T1 and T2" in parameters.get("expr", ""):
                     return {"comparison_result": "Virat Kohli has more runs (13848 vs 10773), while MS Dhoni has won more major ICC tournament trophies as Captain."}
+                elif "T1_output" in parameters:
+                    return {"result": 7, "note": "MS Dhoni is older than Virat Kohli by approximately 7 years"}
                 
                 # Sandbox code execution support
                 if server == "local_python_fallback" and "code" in parameters:
