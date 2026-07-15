@@ -119,6 +119,12 @@ class ExecutorAgent:
                     return {"birth_year": -100, "era": "BC", "name": "Julius Caesar"}
                 elif "T1.birth_year" in parameters.get("expr", ""):
                     return {"result": 56, "note": "Emperor Han-Wu is older by 56 years"}
+                elif "MS Dhoni" in parameters.get("query", ""):
+                    return {"player": "MS Dhoni", "role": "Wicketkeeper-Batsman / Captain", "ODI_runs": 10773, "T20_World_Cups": 1, "ODI_World_Cups": 1}
+                elif "Virat Kohli" in parameters.get("query", ""):
+                    return {"player": "Virat Kohli", "role": "Batsman / Former Captain", "ODI_runs": 13848, "Test_runs": 8848}
+                elif "Compare T1 and T2" in parameters.get("expr", ""):
+                    return {"comparison_result": "Virat Kohli has more runs (13848 vs 10773), while MS Dhoni has won more major ICC tournament trophies as Captain."}
                 
                 # Sandbox code execution support
                 if server == "local_python_fallback" and "code" in parameters:

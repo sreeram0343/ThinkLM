@@ -106,35 +106,67 @@ class PlannerAgent:
         """
         logger.info(f"Planning sub-tasks for query: '{query}'")
         
-        mock_dag_json = {
-            "tasks": [
-                {
-                    "id": "T1",
-                    "description": "Search the birthdate of Emperor Han-Wu",
-                    "tool": "web_search",
-                    "parameters": {"query": "Emperor Han-Wu birth date"}
-                },
-                {
-                    "id": "T2",
-                    "description": "Search the birthdate of Julius Caesar",
-                    "tool": "web_search",
-                    "parameters": {"query": "Julius Caesar birth date"}
-                },
-                {
-                    "id": "T3",
-                    "description": "Calculate age difference between Han-Wu and Julius Caesar",
-                    "tool": "calculator",
-                    "parameters": {
-                        "expr": "T1.birth_year - T2.birth_year",
-                        "dependencies": ["T1", "T2"]
+        query_lower = query.lower()
+        if "dhoni" in query_lower and "kohli" in query_lower:
+            mock_dag_json = {
+                "tasks": [
+                    {
+                        "id": "T1",
+                        "description": "Retrieve statistics and career achievements of MS Dhoni",
+                        "tool": "web_search",
+                        "parameters": {"query": "MS Dhoni career stats"}
+                    },
+                    {
+                        "id": "T2",
+                        "description": "Retrieve statistics and career achievements of Virat Kohli",
+                        "tool": "web_search",
+                        "parameters": {"query": "Virat Kohli career stats"}
+                    },
+                    {
+                        "id": "T3",
+                        "description": "Compare career metrics between MS Dhoni and Virat Kohli",
+                        "tool": "calculator",
+                        "parameters": {
+                            "expr": "Compare T1 and T2 statistics",
+                            "dependencies": ["T1", "T2"]
+                        }
                     }
-                }
-            ],
-            "dependencies": [
-                {"source": "T1", "target": "T3"},
-                {"source": "T2", "target": "T3"}
-            ]
-        }
+                ],
+                "dependencies": [
+                    {"source": "T1", "target": "T3"},
+                    {"source": "T2", "target": "T3"}
+                ]
+            }
+        else:
+            mock_dag_json = {
+                "tasks": [
+                    {
+                        "id": "T1",
+                        "description": "Search the birthdate of Emperor Han-Wu",
+                        "tool": "web_search",
+                        "parameters": {"query": "Emperor Han-Wu birth date"}
+                    },
+                    {
+                        "id": "T2",
+                        "description": "Search the birthdate of Julius Caesar",
+                        "tool": "web_search",
+                        "parameters": {"query": "Julius Caesar birth date"}
+                    },
+                    {
+                        "id": "T3",
+                        "description": "Calculate age difference between Han-Wu and Julius Caesar",
+                        "tool": "calculator",
+                        "parameters": {
+                            "expr": "T1.birth_year - T2.birth_year",
+                            "dependencies": ["T1", "T2"]
+                        }
+                    }
+                ],
+                "dependencies": [
+                    {"source": "T1", "target": "T3"},
+                    {"source": "T2", "target": "T3"}
+                ]
+            }
         
         # NetworkX verification layer: Ensure it is a valid, acyclic graph
         g = nx.DiGraph()
