@@ -325,6 +325,18 @@ class DualProcessMemory:
             node_pair for node_pair in sorted_nodes if node_pair[1] >= threshold
         ]
 
+    def _initialize_anchors(self, query: str) -> Dict[str, float]:
+        import re
+        query_words = set(re.findall(r'\w+', query.lower()))
+        anchors: Dict[str, float] = {}
+        for node in self.semantic_graph.nodes:
+            label = self.semantic_graph.nodes[node].get("embedding_label", str(node)).lower()
+            intersection = query_words.intersection(set(re.findall(r'\w+', label)))
+            if intersection:
+                score = len(intersection) / len(query_words)
+                anchors[node] = score
+        return anchors
+
     def _apply_lateral_inhibition(
         self, potentials: Dict[str, float], top_m: int = 7
     ) -> Dict[str, float]:

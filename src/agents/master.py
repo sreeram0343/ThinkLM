@@ -1,4 +1,5 @@
 import logging
+import re
 from typing import Dict, Any, List, Optional
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -23,11 +24,72 @@ class MasterAgent:
     def __init__(self, model_name: str = "Qwen/Qwen2.5-7B-Instruct", temperature: float = 0.1):
         self.model_name = model_name
         self.temperature = temperature
+        self._classifier_initialized = False
+        self._use_dense = False
+        self.emb_model = None
+        self.exemplar_embeddings = {}
+        
+        # Predefined exemplars for each execution tier
+        self.exemplars = {
+            "WRITER_ONLY": [
+                "Who was Emperor Han-Wu?",
+                "What was Emperor Han-Wu's birth name?",
+                "Tell me about Emperor Wu of Han.",
+                "Who is Julius Caesar?",
+                "Tell me about Liu Che",
+                "What is the birth name of Emperor Han-Wu?",
+                "Factual lookup for Emperor Han-Wu birth name",
+                "Who was the first emperor of China?",
+                "What is the capital of France?",
+                "Who wrote Romeo and Juliet?"
+            ],
+            "EXECUTOR_INCLUSIVE": [
+                "What is the weather in Beijing today?",
+                "What is today's weather in Tokyo?",
+                "Show me the stock price of Apple.",
+                "What is the price of Bitcoin?",
+                "Tell me the current time in London.",
+                "Search the web for real-time information about MS Dhoni.",
+                "Find the current weather forecast for Beijing.",
+                "Retrieve the stock price of Tesla today."
+            ],
+            "PLANNER_ENHANCED": [
+                "Calculate the age difference between Emperor Han-Wu and Julius Caesar",
+                "Compare the career achievements and statistics of MS Dhoni and Virat Kohli",
+                "Compare Han-Wu age to Julius Caesar",
+                "How does the age of MS Dhoni compare to Virat Kohli?",
+                "Why did the Roman Empire fall and what was the difference between it and the Roman Republic?",
+                "Calculate the age difference between Dhoni and Kohli.",
+                "Decompose this query and calculate the age difference between Emperor Han-Wu and Julius Caesar.",
+                "Explain how to calculate the difference between their ages."
+            ]
+        }
         logger.info(f"MasterAgent initialized using backbone: {self.model_name}")
+
+    def _init_semantic_classifier(self) -> None:
+        """Loads dense encoding model lazily to build the semantic classifier."""
+        if self._classifier_initialized:
+            return
+            
+        try:
+            from sentence_transformers import SentenceTransformer
+            self.emb_model = SentenceTransformer("all-MiniLM-L6-v2")
+            logger.info("Semantic routing classifier: sentence-transformers model loaded.")
+            
+            # Pre-calculate exemplar embeddings
+            self.exemplar_embeddings = {}
+            for tier, queries in self.exemplars.items():
+                self.exemplar_embeddings[tier] = self.emb_model.encode(queries, convert_to_numpy=True)
+            self._use_dense = True
+        except Exception as e:
+            logger.warning(f"Semantic classifier dense model loading failed: {e}. Falling back to lexical/rule-based routing.")
+            self._use_dense = False
+            
+        self._classifier_initialized = True
 
     def analyze_complexity(self, query: str) -> str:
         """
-        Gates the user query into one of three complexity tiers.
+        Gates the user query into one of three complexity tiers using semantic similarity.
         
         Args:
             query (str): The raw user search query.
@@ -35,14 +97,72 @@ class MasterAgent:
         Returns:
             str: One of 'WRITER_ONLY', 'EXECUTOR_INCLUSIVE', or 'PLANNER_ENHANCED'.
         """
+        self._init_semantic_classifier()
         query_lower = query.lower()
-        complex_keywords = ["why", "how", "compare", "elder", "younger", "difference", "versus", "vs", "calculate"]
+        
+        # 1. Semantic Dense Classification (if available)
+        if self._use_dense and self.emb_model is not None:
+            try:
+                import numpy as np
+                query_emb = self.emb_model.encode(query, convert_to_numpy=True)
+                
+                best_score = -1.0
+                best_tier = None
+                
+                for tier, embeddings in self.exemplar_embeddings.items():
+                    for emb in embeddings:
+                        norm_q = np.linalg.norm(query_emb)
+                        norm_e = np.linalg.norm(emb)
+                        if norm_q > 0 and norm_e > 0:
+                            similarity = float(np.dot(query_emb, emb) / (norm_q * norm_e))
+                        else:
+                            similarity = 0.0
+                        
+                        if similarity > best_score:
+                            best_score = similarity
+                            best_tier = tier
+                
+                if best_score > 0.4 and best_tier is not None:
+                    logger.info(f"Semantic dense classifier routed query to: {best_tier} (similarity score: {best_score:.4f})")
+                    return best_tier
+            except Exception as e:
+                logger.warning(f"Error during semantic dense classification: {e}. Falling back to lexical/rules.")
+
+        # 2. Lexical & Rule-Based Fallback
+        # Rule-based keywords check
+        complex_keywords = ["why", "how", "compare", "elder", "younger", "difference", "versus", "vs", "calculate", "comparison", "difference"]
         tool_keywords = ["weather", "price", "stock", "search", "time", "date", "compile"]
         
+        # Check standard keywords
         if any(kw in query_lower for kw in complex_keywords):
+            logger.info("Rule-based classification: PLANNER_ENHANCED (complex keywords matched)")
             return "PLANNER_ENHANCED"
         elif any(kw in query_lower for kw in tool_keywords):
+            logger.info("Rule-based classification: EXECUTOR_INCLUSIVE (tool keywords matched)")
             return "EXECUTOR_INCLUSIVE"
+            
+        # Lexical word-overlap matching fallback
+        best_overlap_score = 0.0
+        best_overlap_tier = "WRITER_ONLY"
+        
+        query_tokens = set(re.findall(r'\w+', query_lower))
+        if query_tokens:
+            for tier, queries in self.exemplars.items():
+                for ex_query in queries:
+                    ex_tokens = set(re.findall(r'\w+', ex_query.lower()))
+                    if not ex_tokens:
+                        continue
+                    intersection = query_tokens.intersection(ex_tokens)
+                    score = len(intersection) / max(len(query_tokens), len(ex_tokens))
+                    if score > best_overlap_score:
+                        best_overlap_score = score
+                        best_overlap_tier = tier
+                        
+        if best_overlap_score > 0.25:
+            logger.info(f"Lexical overlap classification routed query to: {best_overlap_tier} (overlap: {best_overlap_score:.4f})")
+            return best_overlap_tier
+            
+        logger.info("Default classification: WRITER_ONLY")
         return "WRITER_ONLY"
 
     def run_collaborative_loop(self, query: str, memory_state: Optional[Any] = None) -> Dict[str, Any]:
