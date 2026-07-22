@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ThinkLM Dashboard • Self-Evolving Language Model</title>
+  <title>ThinkLM AI OS • Self-Evolving Language Model</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,6 +14,7 @@
         extend: {
           fontFamily: {
             sans: ['Outfit', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           }
         }
       }
@@ -23,7 +24,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- React & Babel -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -33,747 +34,403 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+<body class="bg-[#030712] text-slate-100 font-sans antialiased overflow-hidden selection:bg-purple-500/30 selection:text-purple-200">
   <div id="root"></div>
 
   <script type="text/babel">
     const { useState, useMemo, useEffect } = React;
 
     function App() {
-      const [activeTab, setActiveTab] = useState('scheduler'); // 'scheduler', 'playground', 'hub', 'telemetry'
-
-      // --- VIEW 1 STATES: Scheduler ---
+      const [activeNav, setActiveNav] = useState('dashboard');
+      const [activeMode, setActiveMode] = useState('Local Mode (Offline)');
+      const [promptText, setPromptText] = useState('');
+      
       const [currentStep, setCurrentStep] = useState(55);
       const [kSteps, setKSteps] = useState(50);
-      const [learningRate, setLearningRate] = useState('1e-6');
-      const [klBeta, setKlBeta] = useState(0.001);
 
       const isPhase1 = useMemo(() => (currentStep % (2 * kSteps)) < kSteps, [currentStep, kSteps]);
-      const activePhaseName = isPhase1 ? 'PHASE 1: Policy Training' : 'PHASE 2: Rubric Training';
-      const activeRoleName = isPhase1 ? 'Policy (Response Generator)' : 'Rubric Generator';
-      const activeSystemPrompt = isPhase1 
-        ? 'You are a helpful assistant.'
-        : 'You are an expert evaluator generating rubrics to assess answers to questions.';
+      const activePhaseTitle = isPhase1 ? 'PHASE 1: Policy Training' : 'PHASE 2: Rubric Training';
+      const activePhaseSubtitle = isPhase1 
+        ? 'Updating Policy Parameters (θ) • Frozen Rubric Generator (φ)' 
+        : 'Updating Rubric Generator (φ) • Frozen Policy Parameters (θ)';
 
-      // --- VIEW 2 STATES: Rubric & Judge Playground ---
-      const [queryInput, setQueryInput] = useState(
-        'The perimeter of a rectangle is 48. What is the largest possible area of the rectangle?'
-      );
-
-      const [criteriaList, setCriteriaList] = useState([
-        {
-          id: 1,
-          criterion: 'Provides the correct maximum area of 144, derived from the given perimeter of 48.',
-          weight: 0.80,
-          scoring_levels: {
-            '1.0': 'States 144 clearly and derives it from perimeter 48.',
-            '0.5': 'States 144 but misses derivation steps.',
-            '0.0': 'Incorrect maximum area or fails to solve.'
-          },
-          isDealbreaker: true
-        },
-        {
-          id: 2,
-          criterion: 'Uses perimeter formula 2(L+W)=48 and area formula A=L*W correctly.',
-          weight: 0.15,
-          scoring_levels: {
-            '1.0': 'Correctly sets up 2(L+W)=48 and Area=L*(24-L).',
-            '0.0': 'Contains major formula errors.'
-          },
-          isDealbreaker: false
-        },
-        {
-          id: 3,
-          criterion: 'Explains that a square maximizes area for a given perimeter.',
-          weight: 0.05,
-          scoring_levels: {
-            '1.0': 'Explicitly notes L=W=12 forms a square.',
-            '0.0': 'No explanation provided.'
-          },
-          isDealbreaker: false
-        }
-      ]);
-
-      const [expandedCriteria, setExpandedCriteria] = useState({ 1: true });
-      const [responseToEvaluate, setResponseToEvaluate] = useState(
-        'Let length be L and width be W. Given perimeter 2(L+W)=48 => L+W=24. Area A = L*W = L*(24-L). Taking derivative dA/dL = 24 - 2L = 0 yields L=12 and W=12. Since L=W=12, the rectangle is a square. The maximum area is 144.'
-      );
-
-      const [satisfactionScores, setSatisfactionScores] = useState({ 1: 1.0, 2: 1.0, 3: 0.9 });
-      const [isJudging, setIsJudging] = useState(false);
-
-      const totalWeight = useMemo(() => criteriaList.reduce((acc, c) => acc + c.weight, 0), [criteriaList]);
-      const isWeightValid = totalWeight >= 0.85 && totalWeight <= 1.15;
-
-      const totalJudgeScore = useMemo(() => {
-        return criteriaList.reduce((acc, c) => acc + (c.weight * (satisfactionScores[c.id] || 0)), 0);
-      }, [criteriaList, satisfactionScores]);
-
-      const handlePresetSelect = (type) => {
-        if (type === 'math') {
-          setQueryInput('The perimeter of a rectangle is 48. What is the largest possible area of the rectangle?');
-          setCriteriaList([
-            {
-              id: 1,
-              criterion: 'Provides the correct maximum area of 144, derived from perimeter 48.',
-              weight: 0.80,
-              scoring_levels: {
-                '1.0': 'States 144 as the maximum area.',
-                '0.0': 'Incorrect area calculation.'
-              },
-              isDealbreaker: true
-            },
-            {
-              id: 2,
-              criterion: 'Uses formulas 2(L+W)=48 and A=L*W accurately.',
-              weight: 0.20,
-              scoring_levels: {
-                '1.0': 'Correct algebraic setup.',
-                '0.0': 'Formula error.'
-              },
-              isDealbreaker: false
-            }
-          ]);
-        } else if (type === 'summary') {
-          setQueryInput('Create a 3-paragraph summary of AI impact in software development. Each paragraph must start with a square-bracket title.');
-          setCriteriaList([
-            {
-              id: 1,
-              criterion: 'Consists of exactly 3 paragraphs, each starting with a bracketed title.',
-              weight: 0.50,
-              scoring_levels: {
-                '1.0': 'Exactly 3 paragraphs with bracketed titles.',
-                '0.5': '3 paragraphs but missing titles.',
-                '0.0': 'Incorrect paragraph count.'
-              },
-              isDealbreaker: false
-            },
-            {
-              id: 2,
-              criterion: 'Discusses developer productivity, code quality, and future concerns.',
-              weight: 0.50,
-              scoring_levels: {
-                '1.0': 'Covers productivity, quality, and future outlook thoroughly.',
-                '0.0': 'Off-topic content.'
-              },
-              isDealbreaker: false
-            }
-          ]);
-        }
-      };
-
-      // --- VIEW 3 STATES: Preference Hub ---
-      const [hubTab, setHubTab] = useState('temporal');
-
-      const rolloutBuffer = [
-        { step: 120, question: 'Perimeter of 48 max area', response: 'L=12, W=12 => Area 144', ageGap: 0 },
-        { step: 110, question: 'Perimeter of 48 max area', response: 'L=14, W=10 => Area 140', ageGap: 10 },
-        { step: 80, question: 'Perimeter of 48 max area', response: 'L=16, W=8 => Area 128', ageGap: 40 },
-        { step: 40, question: 'Perimeter of 48 max area', response: 'Area = 48 * 2 = 96', ageGap: 80 },
-        { step: 20, question: 'Perimeter of 48 max area', response: 'Perimeter is 48.', ageGap: 100 },
-      ];
-
-      // --- VIEW 4 SVG inline charts data ---
       const marginCurve = [0.05, 0.12, 0.18, 0.25, 0.32, 0.38, 0.42];
-      const accuracyCurve = [59.7, 61.2, 63.5, 65.8, 67.4, 68.9, 69.3];
-      const formatErrorCurve = [77.0, 45.0, 23.0, 12.0, 3.5, 1.2, 0.8];
+      const complianceCurve = [99.2, 99.2, 99.2, 99.2, 99.2, 99.2, 99.2];
+      const kappaCurve = [0.25, 0.35, 0.44, 0.52, 0.58, 0.61, 0.64];
 
       const renderSvgLine = (data, min, max, color) => {
-        const width = 300;
-        const height = 80;
+        const width = 280;
+        const height = 70;
         const points = data.map((val, idx) => {
           const x = (idx / (data.length - 1)) * width;
-          const y = height - ((val - min) / (max - min)) * (height - 15) - 8;
+          const y = height - ((val - min) / (max - min)) * (height - 16) - 8;
           return `${x},${y}`;
         }).join(' ');
 
         return (
-          <svg width="100%" height="80" viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
-            <polyline fill="none" stroke={color} strokeWidth="3" points={points} strokeLinecap="round" />
+          <svg width="100%" height="70" viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
+            <polyline fill="none" stroke={color} strokeWidth="2.5" points={points} strokeLinecap="round" strokeLinejoin="round" />
             {data.map((val, idx) => {
               const x = (idx / (data.length - 1)) * width;
-              const y = height - ((val - min) / (max - min)) * (height - 15) - 8;
-              return <circle key={idx} cx={x} cy={y} r="4" fill={color} className="transition-all hover:r-6" />;
+              const y = height - ((val - min) / (max - min)) * (height - 16) - 8;
+              return <circle key={idx} cx={x} cy={y} r="3.5" fill={color} className="transition-all hover:r-5 cursor-pointer" />;
             })}
           </svg>
         );
       };
 
+      const handleQuickAction = (actionName) => {
+        if (actionName === 'rubric') {
+          setPromptText('The perimeter of a rectangle is 48. What is the largest possible area of the rectangle?');
+        } else if (actionName === 'judge') {
+          alert('Executing deterministic Qwen3-1.7B judge evaluation (temperature=0.0)... Score: 0.975/1.000');
+        } else if (actionName === 'preference') {
+          alert('Sampling on-policy preference pair (a+, a-) via Temporal Contrast (Age gap: 80 steps).');
+        } else if (actionName === 'clear_graph') {
+          alert('Cognitive Memory Graph consolidated and pruned in local sandbox.');
+        }
+      };
+
+      useEffect(() => {
+        if (window.lucide) window.lucide.createIcons();
+      });
+
       return (
-        <div className="min-h-screen bg-slate-950 text-slate-100 font-sans p-6">
-          {/* Top Header */}
-          <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-800">
-            <div>
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-400">
-                  <i data-lucide="cpu" className="w-7 h-7"></i>
-                </div>
-                <div>
-                  <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-slate-100 to-emerald-300">
-                    ThinkLM Control Dashboard
-                  </h1>
-                  <p className="text-xs text-slate-400">
-                    Self-Evolving Language Model • Co-Evolved Discriminative Rubrics Architecture (EvoLM)
-                  </p>
-                </div>
-              </div>
-            </div>
+        <div className="relative min-h-screen w-full bg-[#030712] text-slate-100 font-sans antialiased overflow-hidden flex flex-col">
+          
+          {/* Subtle Lunar Ambient Neon Glows */}
+          <div className="fixed inset-0 pointer-events-none z-0">
+            <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]"></div>
+            <div className="absolute top-1/2 -right-40 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]"></div>
+            <div className="absolute -bottom-40 left-1/3 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px]"></div>
+          </div>
 
-            {/* View Switcher Tabs */}
-            <div className="flex items-center gap-2 p-1.5 rounded-xl bg-slate-900 border border-slate-800">
-              <button
-                onClick={() => setActiveTab('scheduler')}
-                className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                  activeTab === 'scheduler' 
-                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' 
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-                }`}
-              >
-                <i data-lucide="layers" className="w-4 h-4"></i>
-                Phase Scheduler
-              </button>
+          <div className="relative z-10 flex flex-1 h-screen overflow-hidden">
 
-              <button
-                onClick={() => setActiveTab('playground')}
-                className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                  activeTab === 'playground' 
-                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' 
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-                }`}
-              >
-                <i data-lucide="zap" className="w-4 h-4"></i>
-                Rubric & Judge Playground
-              </button>
-
-              <button
-                onClick={() => setActiveTab('hub')}
-                className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                  activeTab === 'hub' 
-                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' 
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-                }`}
-              >
-                <i data-lucide="git-compare" className="w-4 h-4"></i>
-                Preference Hub
-              </button>
-
-              <button
-                onClick={() => setActiveTab('telemetry')}
-                className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                  activeTab === 'telemetry' 
-                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' 
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-                }`}
-              >
-                <i data-lucide="trending-up" className="w-4 h-4"></i>
-                Telemetry
-              </button>
-            </div>
-          </header>
-
-          {/* CORE VIEW 1: Joint Training Phase Scheduler */}
-          {activeTab === 'scheduler' && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2 p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-6">
-                  <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
-                    <div className="flex items-center gap-3">
-                      <i data-lucide="sliders" className="w-5 h-5 text-indigo-400"></i>
-                      <h2 className="text-base font-semibold text-slate-100">Co-Evolution Phase Controller (K={kSteps})</h2>
-                    </div>
-                    <span className={`px-3 py-1 text-xs font-bold rounded-full border ${
-                      isPhase1 
-                        ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40' 
-                        : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
-                    }`}>
-                      {activePhaseName}
-                    </span>
+            {/* 1. LEFT NAVIGATION SIDEBAR (Width: 260px) */}
+            <aside className="w-[260px] flex-shrink-0 bg-slate-950/80 backdrop-blur-2xl border-r border-slate-800/80 flex flex-col justify-between p-4 z-20">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 px-2 py-1">
+                  <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500/20 via-indigo-500/20 to-cyan-500/20 border border-purple-500/30 text-purple-400 shadow-lg shadow-purple-500/20">
+                    <i data-lucide="orbit" className="w-5 h-5"></i>
                   </div>
-
-                  <div className="space-y-3">
-                    <div className="flex justify-between text-xs text-slate-400">
-                      <span>Step 1 (Phase 1 Start)</span>
-                      <span className="text-slate-200 font-bold text-sm">Current Step: {currentStep} / 100</span>
-                      <span>Step 100 (Phase 2 End)</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="1"
-                      max="100"
-                      value={currentStep}
-                      onChange={(e) => setCurrentStep(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="text-xs font-medium text-slate-400">Alternating Phase Timeline (50-Step Blocks)</div>
-                    <div className="grid grid-cols-2 gap-2 p-1.5 rounded-xl bg-slate-950 border border-slate-800">
-                      <div className={`p-4 rounded-lg border text-center transition-all ${
-                        isPhase1 
-                          ? 'bg-indigo-950/60 border-indigo-500 text-indigo-200 shadow-md shadow-indigo-900/30' 
-                          : 'bg-slate-900/40 border-slate-800/60 text-slate-500 opacity-60'
-                      }`}>
-                        <div className="text-xs font-bold uppercase tracking-wider mb-1">Phase 1: Policy Training</div>
-                        <div className="text-xs">Steps 1 - 50 • Updating Policy (θ) • Frozen Rubric (φ)</div>
-                      </div>
-
-                      <div className={`p-4 rounded-lg border text-center transition-all ${
-                        !isPhase1 
-                          ? 'bg-emerald-950/60 border-emerald-500 text-emerald-200 shadow-md shadow-emerald-900/30' 
-                          : 'bg-slate-900/40 border-slate-800/60 text-slate-500 opacity-60'
-                      }`}>
-                        <div className="text-xs font-bold uppercase tracking-wider mb-1">Phase 2: Rubric Training</div>
-                        <div className="text-xs">Steps 51 - 100 • Updating Rubric (φ) • Frozen Policy (θ)</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-800/80">
-                    <div>
-                      <label className="text-xs text-slate-400 mb-1 block">K-Step Frequency</label>
-                      <input
-                        type="number"
-                        value={kSteps}
-                        onChange={(e) => setKSteps(parseInt(e.target.value) || 50)}
-                        className="w-full px-3 py-2 text-xs rounded-lg bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs text-slate-400 mb-1 block">Learning Rate (Constant)</label>
-                      <input
-                        type="text"
-                        value={learningRate}
-                        onChange={(e) => setLearningRate(e.target.value)}
-                        className="w-full px-3 py-2 text-xs rounded-lg bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs text-slate-400 mb-1 block">KL Coeff (β)</label>
-                      <input
-                        type="number"
-                        step="0.0001"
-                        value={klBeta}
-                        onChange={(e) => setKlBeta(parseFloat(e.target.value))}
-                        className="w-full px-3 py-2 text-xs rounded-lg bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between space-y-6">
                   <div>
-                    <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
-                      <i data-lucide="cpu" className="w-5 h-5 text-emerald-400"></i>
-                      <h3 className="text-base font-semibold text-slate-100">Parameter Pool: Qwen3-8B</h3>
-                    </div>
-                    <div className="text-xs text-slate-400 mb-4">
-                      Single-model parameter-sharing architecture. Dynamically switches active role via runtime system prompts.
-                    </div>
-
-                    <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-400">Active Role:</span>
-                        <span className="font-semibold text-indigo-300">{activeRoleName}</span>
-                      </div>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-400">Gradient Status:</span>
-                        <span className="font-semibold text-emerald-400">
-                          {isPhase1 ? 'θ (Policy) trainable' : 'φ (Generator) trainable'}
-                        </span>
-                      </div>
-                      <div className="pt-2 border-t border-slate-900">
-                        <div className="text-[11px] text-slate-500 mb-1">Active System Prompt:</div>
-                        <div className="p-2.5 rounded-lg bg-slate-900 text-xs font-mono text-slate-300 border border-slate-800">
-                          "{activeSystemPrompt}"
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-indigo-950/40 border border-indigo-900/50 text-xs text-indigo-300 flex items-center gap-2">
-                    <i data-lucide="check-circle" className="w-4 h-4 text-indigo-400 flex-shrink-0"></i>
-                    <span>Parameter-sharing configuration halves GPU memory footprint during RL post-training.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* CORE VIEW 2: Interactive Rubric Generation & Judge Playground */}
-          {activeTab === 'playground' && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-6">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                  <div className="flex items-center gap-3">
-                    <i data-lucide="book-open" className="w-5 h-5 text-indigo-400"></i>
-                    <h2 className="text-base font-semibold text-slate-100">Rubric Generator (EvoLM Schema)</h2>
-                  </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handlePresetSelect('math')}
-                      className="px-2.5 py-1 text-[11px] rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700"
-                    >
-                      Math Preset
-                    </button>
-                    <button
-                      onClick={() => handlePresetSelect('summary')}
-                      className="px-2.5 py-1 text-[11px] rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700"
-                    >
-                      Summary Preset
-                    </button>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs text-slate-300 font-medium">User Query / Question</label>
-                  <textarea
-                    value={queryInput}
-                    onChange={(e) => setQueryInput(e.target.value)}
-                    rows={3}
-                    className="w-full p-3 text-xs rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-indigo-500"
-                  />
-                  <button
-                    onClick={() => alert("Rubric re-generated successfully with Pydantic validation!")}
-                    className="w-full py-2.5 px-4 text-xs font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition-all"
-                  >
-                    <i data-lucide="zap" className="w-4 h-4"></i>
-                    Generate Instance-Specific Rubric
-                  </button>
-                </div>
-
-                <div className="space-y-4 pt-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-300">Generated Criteria ({criteriaList.length} Items)</span>
-                    <span className={`text-xs px-2.5 py-0.5 rounded-full border ${
-                      isWeightValid 
-                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' 
-                        : 'bg-rose-500/20 text-rose-300 border-rose-500/30'
-                    }`}>
-                      Weight Sum: {totalWeight.toFixed(2)} (Target: 1.0 ± 0.15)
+                    <span className="font-bold tracking-tight text-white text-base bg-clip-text text-transparent bg-gradient-to-r from-purple-200 via-slate-100 to-indigo-200">
+                      ThinkLM AI
                     </span>
+                    <div className="text-[10px] font-mono text-purple-400/80 font-medium">EvoLM OS v2.0</div>
                   </div>
-
-                  {criteriaList.map((crit) => (
-                    <div key={crit.id} className="p-4 rounded-xl bg-slate-950 border border-slate-800/80 space-y-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="space-y-1">
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-indigo-400">Criterion #{crit.id}</span>
-                            {crit.isDealbreaker && (
-                              <span className="px-2 py-0.5 text-[10px] font-bold rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1">
-                                <i data-lucide="flame" className="w-3 h-3 text-amber-400"></i>
-                                DEALBREAKER (Weight ≥ 0.80)
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-xs text-slate-200 font-medium">{crit.criterion}</p>
-                        </div>
-
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="text-xs font-semibold text-slate-300 bg-slate-900 px-2 py-1 rounded-md border border-slate-800">
-                            Weight: {crit.weight.toFixed(2)}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="border-t border-slate-900 pt-2">
-                        <button
-                          onClick={() => setExpandedCriteria(prev => ({ ...prev, [crit.id]: !prev[crit.id] }))}
-                          className="text-[11px] text-slate-400 hover:text-slate-200 flex items-center gap-1"
-                        >
-                          {expandedCriteria[crit.id] ? <i data-lucide="chevron-up" className="w-3.5 h-3.5"></i> : <i data-lucide="chevron-down" className="w-3.5 h-3.5"></i>}
-                          {expandedCriteria[crit.id] ? 'Hide Scoring Levels' : 'View Scoring Levels (1.0, 0.5, 0.0)'}
-                        </button>
-
-                        {expandedCriteria[crit.id] && (
-                          <div className="mt-2 space-y-1 text-[11px] bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
-                            {Object.entries(crit.scoring_levels).map(([scoreKey, desc]) => (
-                              <div key={scoreKey} className="flex gap-2">
-                                <span className="font-mono font-bold text-indigo-300 w-8">{scoreKey}:</span>
-                                <span className="text-slate-300">{desc}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-6">
-                <div className="flex items-center gap-3 pb-3 border-b border-slate-800">
-                  <i data-lucide="shield-check" className="w-5 h-5 text-emerald-400"></i>
-                  <h2 className="text-base font-semibold text-slate-100">Live Grading Sandbox (Frozen Qwen-1.7B Judge)</h2>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs text-slate-300 font-medium">Response to Evaluate</label>
-                  <textarea
-                    value={responseToEvaluate}
-                    onChange={(e) => setResponseToEvaluate(e.target.value)}
-                    rows={4}
-                    className="w-full p-3 text-xs rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-emerald-500 font-mono"
-                  />
-                  <button
-                    onClick={() => {
-                      setIsJudging(true);
-                      setTimeout(() => setIsJudging(false), 500);
-                    }}
-                    className="w-full py-2.5 px-4 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 transition-all"
-                  >
-                    {isJudging ? <i data-lucide="refresh-cw" className="w-4 h-4 animate-spin"></i> : <i data-lucide="play" className="w-4 h-4"></i>}
-                    Run Frozen Local Judge (Deterministic Greedy Score)
-                  </button>
-                </div>
-
-                <div className="space-y-4 pt-2">
-                  <div className="text-xs font-semibold text-slate-300">Criterion Satisfaction & Weighted Score</div>
-
-                  {criteriaList.map((crit) => {
-                    const satisfaction = satisfactionScores[crit.id] || 0.0;
-                    const weightedVal = (crit.weight * satisfaction).toFixed(3);
-
+                <nav className="space-y-1">
+                  {[
+                    { id: 'dashboard', label: 'Dashboard', icon: 'layout-dashboard' },
+                    { id: 'sandbox', label: 'Chat Sandbox', icon: 'message-square' },
+                    { id: 'memory', label: 'Memory Graph', icon: 'git-fork' },
+                    { id: 'tools', label: 'Tools (MCP)', icon: 'wrench' },
+                    { id: 'training', label: 'GRPO Training Loop', icon: 'activity' },
+                    { id: 'evaluation', label: 'Evaluation', icon: 'award' },
+                    { id: 'settings', label: 'System Settings', icon: 'settings' },
+                  ].map((item) => {
+                    const isActive = activeNav === item.id;
                     return (
-                      <div key={crit.id} className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-slate-300 font-medium">Criterion #{crit.id} Satisfaction:</span>
-                          <span className="font-mono text-emerald-400 font-bold">{satisfaction.toFixed(1)} / 1.0</span>
-                        </div>
-
-                        <input
-                          type="range"
-                          min="0.0"
-                          max="1.0"
-                          step="0.1"
-                          value={satisfaction}
-                          onChange={(e) => setSatisfactionScores(prev => ({ ...prev, [crit.id]: parseFloat(e.target.value) }))}
-                          className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-                        />
-
-                        <div className="flex justify-between items-center text-[11px] text-slate-400 pt-1 border-t border-slate-900">
-                          <span>Weight ({crit.weight.toFixed(2)}) × Satisfaction ({satisfaction.toFixed(1)})</span>
-                          <span className="font-mono text-indigo-300 font-bold">= {weightedVal}</span>
-                        </div>
-                      </div>
+                      <button
+                        key={item.id}
+                        onClick={() => setActiveNav(item.id)}
+                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                          isActive
+                            ? 'bg-gradient-to-r from-purple-600/30 to-indigo-600/20 border border-purple-500/40 text-white shadow-lg shadow-purple-900/20'
+                            : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60 border border-transparent'
+                        }`}
+                      >
+                        <i data-lucide={item.icon} className={`w-4 h-4 ${isActive ? 'text-purple-400' : 'text-slate-400'}`}></i>
+                        <span>{item.label}</span>
+                      </button>
                     );
                   })}
+                </nav>
+              </div>
 
-                  <div className="p-4 rounded-xl bg-gradient-to-br from-slate-900 to-indigo-950 border border-indigo-800/50 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs text-slate-400">Total Aggregated Rubric Score</div>
-                      <div className="text-xl font-bold text-emerald-300 font-mono">
-                        s = J(q, r, a) = {totalJudgeScore.toFixed(3)} / 1.000
-                      </div>
-                    </div>
-                    <i data-lucide="award" className="w-8 h-8 text-emerald-400 opacity-80"></i>
-                  </div>
+              <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-[11px] font-mono text-slate-400 space-y-1">
+                <div className="flex items-center justify-between text-slate-300">
+                  <span>Model Pool:</span>
+                  <span className="text-purple-400 font-bold">Qwen3-8B</span>
+                </div>
+                <div className="flex items-center justify-between text-slate-300">
+                  <span>Local Judge:</span>
+                  <span className="text-emerald-400 font-bold">Qwen3-1.7B</span>
                 </div>
               </div>
-            </div>
-          )}
+            </aside>
 
-          {/* CORE VIEW 3: Preference Pair Consolidation Hub */}
-          {activeTab === 'hub' && (
-            <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+            {/* Right Section Container */}
+            <div className="flex-1 flex flex-col h-screen overflow-hidden">
+
+              {/* 2. TOP CONTROL BAR (Height: 64px) */}
+              <header className="h-[64px] flex-shrink-0 px-6 bg-slate-950/70 backdrop-blur-2xl border-b border-slate-800/80 flex items-center justify-between z-20">
                 <div className="flex items-center gap-3">
-                  <i data-lucide="database" className="w-5 h-5 text-indigo-400"></i>
-                  <div>
-                    <h2 className="text-base font-semibold text-slate-100">On-Policy Rollout Preference Hub</h2>
-                    <p className="text-xs text-slate-400">Constructs preference pairs (a+, a-) entirely on-policy without human annotation.</p>
+                  <div className="relative">
+                    <select
+                      value={activeMode}
+                      onChange={(e) => setActiveMode(e.target.value)}
+                      className="appearance-none bg-slate-900/90 border border-slate-800 rounded-xl px-3 py-1.5 pr-8 text-xs font-medium text-slate-200 focus:outline-none focus:border-purple-500/50 cursor-pointer"
+                    >
+                      <option value="Local Mode (Offline)">Local Mode (Offline)</option>
+                      <option value="Distributed Cluster Mode">Distributed Cluster Mode</option>
+                    </select>
+                    <i data-lucide="chevron-down" className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                  </div>
+
+                  <div className="h-4 w-px bg-slate-800"></div>
+
+                  <div className="text-xs font-mono text-slate-400 flex items-center gap-2">
+                    <span>Session ID:</span>
+                    <span className="text-indigo-300 bg-slate-900 px-2 py-0.5 rounded-md border border-slate-800 font-bold">
+                      thinklm-v2-run-0042
+                    </span>
                   </div>
                 </div>
 
-                <div className="px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5">
-                  <i data-lucide="check" className="w-3.5 h-3.5"></i>
-                  Active Sampling Guard: Active (Filtering zero-variance prompt groups)
-                </div>
-              </div>
+                <div className="flex items-center gap-4 text-xs font-medium">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-md shadow-emerald-400/50"></span>
+                    <span>MCP Status: Connected</span>
+                  </div>
 
-              <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-6">
-                <div className="flex gap-2 border-b border-slate-800 pb-3">
-                  <button
-                    onClick={() => setHubTab('temporal')}
-                    className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-all ${
-                      hubTab === 'temporal'
-                        ? 'bg-indigo-600 text-white border-indigo-500'
-                        : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-slate-200'
-                    }`}
-                  >
-                    1. Temporal Contrast (Default)
-                  </button>
-                  <button
-                    onClick={() => setHubTab('inferred')}
-                    className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-all ${
-                      hubTab === 'inferred'
-                        ? 'bg-indigo-600 text-white border-indigo-500'
-                        : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-slate-200'
-                    }`}
-                  >
-                    2. Inferred Question (IQ)
-                  </button>
-                  <button
-                    onClick={() => setHubTab('rubric')}
-                    className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-all ${
-                      hubTab === 'rubric'
-                        ? 'bg-indigo-600 text-white border-indigo-500'
-                        : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-slate-200'
-                    }`}
-                  >
-                    3. Rubric-Conditioned (RC)
-                  </button>
-                </div>
-
-                {hubTab === 'temporal' && (
-                  <div className="space-y-4">
-                    <div className="text-xs text-slate-300">
-                      <span className="font-semibold text-indigo-300">Temporal Contrast:</span> Pairs current response (a+) at step <span className="font-bold">t=120</span> against an older checkpoint's response (a-) at step <span className="font-bold">t'=40</span> (Age Gap = 80 steps, inside [20, 100]).
+                  <div className="relative">
+                    <div className="w-8 h-8 rounded-full bg-slate-900 border-2 border-purple-500/50 flex items-center justify-center font-bold text-xs text-purple-300 shadow-md shadow-purple-500/20 cursor-pointer">
+                      TL
                     </div>
+                  </div>
+                </div>
+              </header>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/40 space-y-2">
-                        <div className="flex justify-between items-center text-xs text-emerald-300 font-bold">
-                          <span>Preferred (a+) • Step 120</span>
-                          <span className="px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-[10px]">Current Policy</span>
-                        </div>
-                        <p className="text-xs text-slate-200 font-mono">
-                          "The maximum area is 144, derived by solving L=W=12 for perimeter 48."
-                        </p>
+              {/* Dashboard Scrollable Body */}
+              <main className="flex-1 overflow-y-auto p-6 space-y-6 pb-12">
+
+                {/* 3. CENTRED HERO & PROMPT GATEWAY */}
+                <section className="max-w-4xl mx-auto text-center space-y-4 py-4">
+                  <div>
+                    <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow-[0_0_25px_rgba(168,85,247,0.3)] bg-clip-text text-transparent bg-gradient-to-r from-slate-100 via-purple-100 to-indigo-200">
+                      ThinkLM AI
+                    </h1>
+                    <p className="mt-2 text-xs md:text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
+                      Evolving natural-language discriminative rubrics to unlock self-improving policy alignment.
+                    </p>
+                  </div>
+
+                  {/* Glassmorphic Prompt Container */}
+                  <div className="relative bg-slate-900/70 backdrop-blur-2xl rounded-2xl border border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.15)] overflow-hidden text-left transition-all focus-within:border-purple-500/60">
+                    <textarea
+                      value={promptText}
+                      onChange={(e) => setPromptText(e.target.value)}
+                      placeholder="Enter a question to generate a co-evolved, schema-validated rubric..."
+                      rows={3}
+                      className="w-full p-4 bg-transparent text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none resize-none"
+                    ></textarea>
+
+                    <div className="flex items-center justify-between px-4 py-2.5 bg-slate-950/60 border-t border-slate-800/80">
+                      <div className="flex items-center gap-2 text-slate-400">
+                        <button className="p-1.5 hover:text-slate-200 hover:bg-slate-800/60 rounded-lg transition-all">
+                          <i data-lucide="paperclip" className="w-4 h-4"></i>
+                        </button>
+                        <span className="text-[10px] font-mono text-slate-500">Pydantic v2 Validated</span>
                       </div>
 
-                      <div className="p-4 rounded-xl bg-rose-950/30 border border-rose-500/40 space-y-2">
-                        <div className="flex justify-between items-center text-xs text-rose-300 font-bold">
-                          <span>Dispreferred (a-) • Step 40</span>
-                          <span className="px-2 py-0.5 rounded bg-rose-500/20 border border-rose-500/40 text-[10px]">Historical Checkpoint</span>
+                      <button
+                        onClick={() => {
+                          if (!promptText.trim()) return;
+                          alert("Rubric generated successfully! Conforms to EvoLM schema.");
+                        }}
+                        className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-lg shadow-purple-600/30 flex items-center gap-1.5 transition-all"
+                      >
+                        <span>Execute</span>
+                        <i data-lucide="arrow-up-right" className="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Quick-Action Grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-left">
+                    {[
+                      { id: 'rubric', title: 'Generate Rubric', desc: 'Isolate constraints & target expected values', icon: 'sparkles', color: 'text-purple-400' },
+                      { id: 'judge', title: 'Run Frozen Judge', desc: 'Deterministic eval using local Qwen3-1.7B', icon: 'shield-check', color: 'text-emerald-400' },
+                      { id: 'preference', title: 'Sample Preference', desc: 'On-policy contrast pair construction', icon: 'sliders', color: 'text-indigo-400' },
+                      { id: 'clear_graph', title: 'Clear Graph', desc: 'Consolidate memory vectors in sandbox', icon: 'trash-2', color: 'text-rose-400' },
+                    ].map((act) => (
+                      <button
+                        key={act.id}
+                        onClick={() => handleQuickAction(act.id)}
+                        className="p-3.5 rounded-xl bg-slate-900/60 backdrop-blur-xl border border-slate-800/80 hover:border-purple-500/40 hover:bg-slate-900/90 transition-all group space-y-1.5"
+                      >
+                        <div className="flex items-center gap-2">
+                          <i data-lucide={act.icon} className={`w-4 h-4 ${act.color}`}></i>
+                          <span className="text-xs font-semibold text-slate-200 group-hover:text-white">{act.title}</span>
                         </div>
-                        <p className="text-xs text-slate-200 font-mono">
-                          "Area is 48 * 2 = 96."
-                        </p>
+                        <p className="text-[10px] text-slate-400 leading-tight">{act.desc}</p>
+                      </button>
+                    ))}
+                  </div>
+                </section>
+
+                {/* CORE INTERACTIVE PANELS: Phase Scheduler & Telemetry Grid */}
+                <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                  {/* Phase Scheduler Card */}
+                  <div className="lg:col-span-2 p-5 rounded-2xl bg-slate-900/60 backdrop-blur-2xl border border-slate-800/80 space-y-5">
+                    <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                      <div className="flex items-center gap-2">
+                        <i data-lucide="activity" className="w-4 h-4 text-purple-400"></i>
+                        <h2 className="text-sm font-semibold text-slate-100">Co-Evolution Phase Scheduler</h2>
+                      </div>
+                      <span className={`px-2.5 py-0.5 text-[10px] font-bold rounded-full border ${
+                        isPhase1
+                          ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
+                          : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                      }`}>
+                        {activePhaseTitle}
+                      </span>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-xs text-slate-400 font-mono">
+                        <span>Step 1</span>
+                        <span className="text-slate-200 font-bold">Step {currentStep} / 100</span>
+                        <span>Step 100</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="1"
+                        max="100"
+                        value={currentStep}
+                        onChange={(e) => setCurrentStep(parseInt(e.target.value))}
+                        className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                      />
+                      <div className="text-[11px] text-slate-400 text-center font-mono">
+                        {activePhaseSubtitle}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 p-1.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                      <div className={`p-3.5 rounded-lg border text-center transition-all ${
+                        isPhase1
+                          ? 'bg-purple-950/40 border-purple-500/60 text-purple-200 shadow-lg shadow-purple-950/40'
+                          : 'bg-slate-900/30 border-slate-800/50 text-slate-500 opacity-60'
+                      }`}>
+                        <div className="text-xs font-bold uppercase tracking-wider mb-1">Phase 1: Policy Training</div>
+                        <div className="text-[11px]">Steps 1 - 50 • θ Active</div>
+                      </div>
+
+                      <div className={`p-3.5 rounded-lg border text-center transition-all ${
+                        !isPhase1
+                          ? 'bg-emerald-950/40 border-emerald-500/60 text-emerald-200 shadow-lg shadow-emerald-950/40'
+                          : 'bg-slate-900/30 border-slate-800/50 text-slate-500 opacity-60'
+                      }`}>
+                        <div className="text-xs font-bold uppercase tracking-wider mb-1">Phase 2: Rubric Training</div>
+                        <div className="text-[11px]">Steps 51 - 100 • φ Active</div>
                       </div>
                     </div>
                   </div>
-                )}
 
-                {hubTab === 'inferred' && (
-                  <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3 text-xs">
-                    <div className="font-semibold text-indigo-300">Inferred Question Strategy Pipeline:</div>
-                    <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-1 font-mono">
-                      <div>1. Policy receives preferred response (a+)</div>
-                      <div>2. Policy infers question: q_hat = "What is the maximum area of a rectangle?"</div>
-                      <div>3. Policy generates dispreferred response (a-) based on q_hat</div>
+                  {/* Cognitive Memory Graph Card */}
+                  <div className="p-5 rounded-2xl bg-slate-900/60 backdrop-blur-2xl border border-slate-800/80 flex flex-col justify-between space-y-4">
+                    <div>
+                      <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                        <div className="flex items-center gap-2">
+                          <i data-lucide="git-fork" className="w-4 h-4 text-cyan-400"></i>
+                          <h3 className="text-sm font-semibold text-slate-100">Cognitive Memory Graph</h3>
+                        </div>
+                        <span className="text-[10px] font-mono text-cyan-400">Consolidated</span>
+                      </div>
+
+                      <div className="mt-3 p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2 text-xs">
+                        <div className="flex justify-between items-center text-slate-300">
+                          <span>Vector Nodes:</span>
+                          <span className="font-mono text-indigo-300 font-bold">1,248</span>
+                        </div>
+                        <div className="flex justify-between items-center text-slate-300">
+                          <span>Rollout Capacity:</span>
+                          <span className="font-mono text-emerald-400 font-bold">2,048 (Capped)</span>
+                        </div>
+                        <div className="flex justify-between items-center text-slate-300">
+                          <span>Active Sampling:</span>
+                          <span className="font-mono text-purple-300 font-bold">Filtering Zero-Var</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => alert("Memory Vector Graph view opened.")}
+                      className="w-full py-2 px-3 text-xs font-semibold rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 flex items-center justify-center gap-2 transition-all"
+                    >
+                      <i data-lucide="maximize-2" className="w-3.5 h-3.5"></i>
+                      Explore Full Graph View
+                    </button>
+                  </div>
+
+                </div>
+
+                {/* Telemetry Section: 3 Mini SVG Line Charts */}
+                <div className="max-w-6xl mx-auto space-y-3">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">Real-Time GRPO Telemetry</h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-4 rounded-xl bg-slate-900/60 backdrop-blur-2xl border border-slate-800/80 space-y-2">
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-slate-400">Score Margin (m_bar)</span>
+                        <span className="font-mono font-bold text-emerald-400">+0.42 Δ</span>
+                      </div>
+                      {renderSvgLine(marginCurve, 0.0, 0.5, '#10b981')}
+                      <div className="text-[10px] text-slate-500 flex justify-between font-mono">
+                        <span>Epoch 1 (+0.05)</span>
+                        <span>Epoch 7 (+0.42)</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-slate-900/60 backdrop-blur-2xl border border-slate-800/80 space-y-2">
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-slate-400">Format Compliance</span>
+                        <span className="font-mono font-bold text-indigo-400">99.2%</span>
+                      </div>
+                      {renderSvgLine(complianceCurve, 90.0, 100.0, '#6366f1')}
+                      <div className="text-[10px] text-slate-500 flex justify-between font-mono">
+                        <span>Target: ≥99.0%</span>
+                        <span>Locked via R_format</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-slate-900/60 backdrop-blur-2xl border border-slate-800/80 space-y-2">
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-slate-400">Fleiss's Kappa (κ_hat)</span>
+                        <span className="font-mono font-bold text-amber-400">0.64</span>
+                      </div>
+                      {renderSvgLine(kappaCurve, 0.0, 1.0, '#f59e0b')}
+                      <div className="text-[10px] text-slate-500 flex justify-between font-mono">
+                        <span>Baseline (0.25)</span>
+                        <span>Consensus (0.64)</span>
+                      </div>
                     </div>
                   </div>
-                )}
-
-                {hubTab === 'rubric' && (
-                  <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3 text-xs">
-                    <div className="font-semibold text-indigo-300">Rubric-Conditioned Strategy Pipeline:</div>
-                    <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-1 font-mono">
-                      <div>1. Preferred (a+) generated with rubric prepended to prompt</div>
-                      <div>2. Dispreferred (a-) generated on bare question without rubric</div>
-                    </div>
-                  </div>
-                )}
-
-                <div className="pt-4 border-t border-slate-800">
-                  <div className="text-xs font-semibold text-slate-300 mb-3">Historical Rollout Buffer (2,048 Capacity)</div>
-                  <div className="overflow-x-auto rounded-xl border border-slate-800">
-                    <table className="w-full text-left text-xs text-slate-300">
-                      <thead className="bg-slate-950 text-slate-400 font-medium">
-                        <tr>
-                          <th className="p-3">Step ID</th>
-                          <th className="p-3">Question</th>
-                          <th className="p-3">Response Snippet</th>
-                          <th className="p-3">Age Gap</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-800/60 bg-slate-900/40">
-                        {rolloutBuffer.map((row, idx) => (
-                          <tr key={idx} className="hover:bg-slate-800/40">
-                            <td className="p-3 font-mono text-indigo-300">{row.step}</td>
-                            <td className="p-3">{row.question}</td>
-                            <td className="p-3 font-mono text-slate-400">{row.response}</td>
-                            <td className="p-3">{row.ageGap} steps</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
                 </div>
-              </div>
+
+              </main>
+
+              {/* 4. BOTTOM STATUS BAR (Height: 32px) */}
+              <footer className="h-[32px] flex-shrink-0 px-6 bg-slate-950/90 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400 z-20">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>System Operational • Local Sandboxed Execution • No External API Calls</span>
+                </div>
+                <div>EvoLM (arXiv:2605.03871)</div>
+              </footer>
+
             </div>
-          )}
-
-          {/* CORE VIEW 4: Real-Time GRPO Telemetry Dashboard */}
-          {activeTab === 'telemetry' && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs text-slate-400">Average Score Margin (m_bar)</div>
-                    <div className="text-2xl font-bold text-emerald-400 font-mono mt-1">+0.42</div>
-                    <div className="text-[11px] text-slate-500 mt-1">Discriminative utility gap J(a+) - J(a-)</div>
-                  </div>
-                  <i data-lucide="trending-up" className="w-8 h-8 text-emerald-400/80"></i>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs text-slate-400">Schema Format Compliance %</div>
-                    <div className="text-2xl font-bold text-indigo-400 font-mono mt-1">99.2%</div>
-                    <div className="text-[11px] text-slate-500 mt-1">Locked via 0.3 format reward weight</div>
-                  </div>
-                  <i data-lucide="shield-check" className="w-8 h-8 text-indigo-400/80"></i>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs text-slate-400">Fleiss's Kappa Agreement (κ_hat)</div>
-                    <div className="text-2xl font-bold text-amber-400 font-mono mt-1">0.64</div>
-                    <div className="text-[11px] text-slate-500 mt-1">Strong ensemble calibration score</div>
-                  </div>
-                  <i data-lucide="award" className="w-8 h-8 text-amber-400/80"></i>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
-                  <div className="text-xs font-semibold text-slate-300">Average Score Margin Widening</div>
-                  {renderSvgLine(marginCurve, 0.0, 0.5, '#10b981')}
-                  <div className="flex justify-between text-[10px] text-slate-500">
-                    <span>Epoch 1 (+0.05)</span>
-                    <span>Epoch 7 (+0.42)</span>
-                  </div>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
-                  <div className="text-xs font-semibold text-slate-300">OLMo3-Adapt Downstream Accuracy (%)</div>
-                  {renderSvgLine(accuracyCurve, 55.0, 75.0, '#6366f1')}
-                  <div className="flex justify-between text-[10px] text-slate-500">
-                    <span>Base (59.7%)</span>
-                    <span>EvoLM (69.3%)</span>
-                  </div>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
-                  <div className="text-xs font-semibold text-slate-300">Schema Validation Error Rate (%)</div>
-                  {renderSvgLine(formatErrorCurve, 0.0, 80.0, '#f43f5e')}
-                  <div className="flex justify-between text-[10px] text-slate-500">
-                    <span>Unformatted (77%)</span>
-                    <span>With R_format (0.8%)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       );
     }
 
     ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-    setTimeout(() => { if (window.lucide) window.lucide.createIcons(); }, 100);
   </script>
 </body>
 </html>
