@@ -4,6 +4,7 @@ import re
 import networkx as nx
 from typing import Dict, Any, List, Optional, Tuple
 from rank_bm25 import BM25Okapi
+from schemas import RubricModel, parse_and_validate_rubric
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("ThinkLM.Planner")
@@ -32,33 +33,104 @@ class AssemblePrompt:
 
 class PlannerAgent:
     """
-    PlannerAgent is responsible for query decomposition and dynamic tool-task binding.
+    PlannerAgent is responsible for query decomposition, dynamic tool-task binding, and rubric generation.
     
     Ref: 'Towards AI Search Paradigm' (Baidu, 2025) [1] and 'Instruction-Tool Retrieval (ITR)' (Franko, 2025) [5, 6].
-    
-    Key Functions:
-    1. Dynamic Capability Boundary: Restricts full tool list into query-oriented candidates using ITR [1, 5, 6].
-    2. DAG Planning: Maps complex queries to Directed Acyclic Graphs containing atomic sub-tasks [1].
-    3. Graph Validation: Ensures the resulting task flow is acyclic, dependency-safe, and topologically sortable.
     """
+    
+    RUBRIC_SYSTEM_PROMPT = (
+        "You are an expert evaluator generating rubrics to assess answers to questions.\n"
+        "Given a question, first analyze it to identify explicit and implicit requirements.\n"
+        "Then generate a rubric of 2-5 criteria conforming to the JSON schema."
+    )
     
     def __init__(self, mcp_client: Optional[Any] = None):
         self.mcp_client = mcp_client
         logger.info("PlannerAgent initialized.")
 
-    def restrict_boundary(self, query: str, active_tools: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def generate_rubric(
+        self,
+        query: str,
+        is_verifiable: Optional[bool] = None,
+        generator_call: Optional[Any] = None,
+    ) -> RubricModel:
         """
-        Implements Instruction-Tool Retrieval (ITR) to bound the active tool dictionary,
-        reducing token overhead and attention dilution during planning.
-        
-        Ref: 'Dynamic System Instructions and Tool Exposure for Efficient Agentic LLMs' [5, 6].
+        Generates and validates an instance-specific rubric for a given query (Step 1).
         
         Args:
-            query (str): The input user query.
-            active_tools (List[Dict[str, Any]]): The full catalog of available tools.
-            
+            query (str): Input prompt / question.
+            is_verifiable (Optional[bool]): If True, enforces a Dealbreaker criterion (weight=0.80).
+            generator_call (Optional[Any]): Callback function to query the rubric generator model.
+
         Returns:
-            List[Dict[str, Any]]: A narrowed, task-relevant subset of tools (e.g. top KB=2 tools) [1, 6].
+            RubricModel: Validated Pydantic RubricModel instance.
+        """
+        logger.info(f"Generating rubric for query: '{query}'")
+        
+        # Auto-detect verifiable tasks (math, code, calculation) if not explicitly passed
+        query_lower = query.lower()
+        if is_verifiable is None:
+            verifiable_keywords = ["calculate", "math", "code", "perimeter", "area", "difference", "sum", "count", "code", "python"]
+            is_verifiable = any(kw in query_lower for kw in verifiable_keywords)
+
+        if generator_call:
+            raw_response = generator_call(self.RUBRIC_SYSTEM_PROMPT, query)
+            rubric_model = parse_and_validate_rubric(raw_response)
+        else:
+            # Standalone / mock generator path with schema validation
+            if is_verifiable:
+                dealbreaker_text = f"Provides the exact correct verifiable outcome or solution for '{query}'"
+                mock_json = json.dumps({
+                    "criteria": [
+                        {
+                            "criterion": dealbreaker_text,
+                            "weight": 0.80,
+                            "scoring_levels": {
+                                "1.0": "The response provides the exact correct numerical/verifiable answer.",
+                                "0.5": "The response arrives at the answer with minor step errors.",
+                                "0.0": "The response fails to solve or gives an incorrect answer."
+                            }
+                        },
+                        {
+                            "criterion": "Presents a clear, logical step-by-step derivation.",
+                            "weight": 0.20,
+                            "scoring_levels": {
+                                "1.0": "Derivation is fully logical and clear throughout.",
+                                "0.0": "Derivation is missing or incoherent."
+                            }
+                        }
+                    ]
+                })
+            else:
+                mock_json = json.dumps({
+                    "criteria": [
+                        {
+                            "criterion": f"Directly addresses the main topic of '{query}'",
+                            "weight": 0.50,
+                            "scoring_levels": {
+                                "1.0": "Completely addresses the core prompt topic.",
+                                "0.5": "Partially addresses the topic.",
+                                "0.0": "Fails to address the topic."
+                            }
+                        },
+                        {
+                            "criterion": "Provides clear, well-structured, and coherent explanations.",
+                            "weight": 0.50,
+                            "scoring_levels": {
+                                "1.0": "Explanations are highly coherent and well-structured.",
+                                "0.0": "Explanations are incoherent or poorly structured."
+                            }
+                        }
+                    ]
+                })
+            rubric_model = parse_and_validate_rubric(mock_json)
+
+        logger.info(f"Rubric generated successfully with {len(rubric_model.criteria)} criteria (is_verifiable={is_verifiable}).")
+        return rubric_model
+
+    def restrict_boundary(self, query: str, active_tools: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Implements Instruction-Tool Retrieval (ITR) to bound the active tool dictionary.
         """
         logger.info(f"Applying BM25 ITR pruning to {len(active_tools)} tools based on query context...")
         
@@ -66,7 +138,6 @@ class PlannerAgent:
             logger.info("No active tools available. Returning empty list.")
             return []
             
-        # Tokenize tool descriptions and names
         tokenized_corpus = []
         for tool in active_tools:
             name = tool.get("name", "")
@@ -76,18 +147,13 @@ class PlannerAgent:
             tokenized_corpus.append(tokens)
             
         bm25 = BM25Okapi(tokenized_corpus)
-        
-        # Tokenize user query
         tokenized_query = re.findall(r'\w+', query.lower())
         if not tokenized_query:
             logger.info("Empty query tokens. Returning top 2 active tools by default order.")
             return active_tools[:2]
             
-        # Compute scores and rank tools
         scores = bm25.get_scores(tokenized_query)
         scored_tools = sorted(zip(active_tools, scores), key=lambda x: x[1], reverse=True)
-        
-        # Keep top KB=2 tools
         kb = 2
         narrowed_tools = [tool for tool, score in scored_tools[:kb]]
         logger.info(f"Dynamic Capability Boundary restricted to {len(narrowed_tools)} tools.")
@@ -96,13 +162,6 @@ class PlannerAgent:
     def create_task_dag(self, query: str, active_mcp_tools: List[Dict[str, Any]]) -> Tuple[nx.DiGraph, Dict[str, Any]]:
         """
         Generates a verified Directed Acyclic Graph (DAG) for multi-step reasoning.
-        
-        Args:
-            query (str): The raw input query.
-            active_mcp_tools (List[Dict[str, Any]]): Available MCP tools.
-            
-        Returns:
-            Tuple[nx.DiGraph, Dict[str, Any]]: A NetworkX DiGraph instance and its raw JSON representation.
         """
         logger.info(f"Planning sub-tasks for query: '{query}'")
         
@@ -199,7 +258,6 @@ class PlannerAgent:
                 ]
             }
         
-        # NetworkX verification layer: Ensure it is a valid, acyclic graph
         g = nx.DiGraph()
         for task in mock_dag_json["tasks"]:
             g.add_node(
